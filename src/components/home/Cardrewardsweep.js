@@ -353,10 +353,10 @@ const from = user.sweep;
                 Delete
               </button>
             )}
-            <h1 className="text-white font-bold mb-4">
+            <p className="text-white font-bold mb-4">
               Raffle # {number + 1}{" "}
-            </h1>
-            <h1 className="text-white font-bold mb-4 flex gap-2">
+            </p>
+            <p className="text-white font-bold mb-4 flex gap-2">
               Live{" "}
               <div className="w-2">
                 <span
@@ -365,7 +365,7 @@ const from = user.sweep;
                   }`}
                 />
               </div>
-            </h1>
+            </p>
           </div>
           <img src={data && data.image} className="rounded-lg w-180" />
 

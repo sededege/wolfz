@@ -322,10 +322,10 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
                 Delete
               </button>
             )}
-            <h1 className="text-white font-bold mb-4">
+            <p className="text-white font-bold mb-4 text-[1rem]">
               Raffle # {number + 1}{" "}
-            </h1>
-            <h1 className="text-white font-bold mb-4 flex gap-2">
+            </p>
+            <h1 className="text-white font-bold mb-4 flex gap-2  text-[1rem]">
               Live{" "}
               <div className="w-2">
                 <span

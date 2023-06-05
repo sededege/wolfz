@@ -310,7 +310,7 @@ return `${diff} days ago`
           )}
           {/*       <Tweet tweetId="1624841242055004161" options={{ theme: "dark" }} />
            */}
-          <h1 className="text-white font-bold mb-4">Raffle # {number + 1}</h1>
+          <p className="text-white font-bold mb-4 text-[1rem]">Raffle # {number + 1}</p>
           <img src={data && data.image} className="rounded-lg w-180" />
 
           <p className="text-center text-[1rem] text-white font-bold mt-2 mb-2">

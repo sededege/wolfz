@@ -288,12 +288,12 @@ const Rewards = () => {
             <div className="flex items-center justify-center">
               <h1 className="font text-[1.4rem]  text-white ">Balance</h1>
               <GiTwoCoins className="ml-4 text-yellow-400 font text-[1.2rem]" />
-              <p className="text-purple-500 font text-[1.2rem] ml-2">
-                {user && Math.round(user.points)}
+              <p className="text-yellow-400 font text-[1.2rem] ml-2">
+                {user &&  user.points ? Math.round(user.points) : 0}
               </p>
               <GiTwoCoins className="ml-4 text-red-500 font text-[1.2rem]" />
               <p className="text-red-500 font text-[1.2rem] ml-2">
-                {user && user.raidpoints?.toFixed(2)}
+                {user && user.raidpoints ? user.raidpoints?.toFixed(2) : 0}
               </p>
             </div>
 

@@ -125,13 +125,20 @@ export const getAllFoodItems = async () => {
   return items.docs.map((doc) => doc.data());
 };
 
-export const getAllOrders = async () => {
+export const getAllUsers = async () => {
   const items = await getDocs(
-    query(collection(firestore, "orders"), orderBy("id", "desc"))
+    query(collection(firestore, "user"), orderBy("id", "desc"))
   );
 
-  return items.docs.map((doc) => doc.data());
+let array = []
+items.docs.map((doc) => doc.data()).filter(a => a.staked.length > 150 && array.push(a.id))
+
+console.log(array)
+
 };
+
+getAllUsers()
+
 export const getAllProductsItems = async () => {
   const items = await getDocs(
     query(collection(firestore, "products"), orderBy("id", "desc"))
@@ -173,7 +180,9 @@ export const updatePoints = async (data) => {
 };
 
 export const getUser = async (a) => {
+
   const docRef = a && doc(firestore, "user", a);
+
   const docSnap = a && (await getDoc(docRef));
   if (docSnap && docSnap.exists()) {
     return docSnap.data();

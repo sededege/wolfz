@@ -67,7 +67,8 @@ const Staked = () => {
         authorization: 'Bearer 41d5a889-a8e6-4f4d-9183-4d594ca01992'
       },
       body: JSON.stringify({
-        ownerAccount: publicKey && publicKey.toBase58(),
+         ownerAccount: publicKey && publicKey.toBase58(),
+         /* ownerAccount: 'BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o', */
         helloMoonCollectionId: 'aec8c053152b2f1b7dc01db7e298d571',
         page: num
       })
@@ -78,7 +79,7 @@ const Staked = () => {
     const request = await fetch(b)
     .then(response => response.json())
     .then(res =>  {
-     
+
       setNfts((prev) => [...prev,{imageUrl: res.image, name: res.name, tokenAddress: tokenAddress }])
       setNfts2((prev) => [...prev,{imageUrl: res.image, name: res.name,tokenAddress: tokenAddress }])
     }
