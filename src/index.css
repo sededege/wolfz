@@ -1,0 +1,240 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+* {
+ 
+  transition: all 0.2s ease-in;
+
+  /*   background-color: #0f121a;
+ */
+}
+
+body {
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #0f121a;
+  background-image: url("./components/img/twitter_4.jpg") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.back {
+  background-image: url("./components/img/twitch.png") !important;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.blinking-point {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  animation: blink 0.5s alternate infinite;
+}
+
+@keyframes blink {
+  from {
+    visibility: visible;
+  }
+  to {
+    visibility: hidden;
+  }
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: white !important;
+  background-color: rgba(255, 255, 255, 0.5);
+  right: 10px;
+  padding: 10px;
+  color: #c297d3 !important;
+  fill: #c297d3 !important;
+  stroke: #c297d3 !important;
+}
+.testeo {
+  mix-blend-mode: screen !important;
+}
+
+
+/* .image-gallery-icon {
+    background-color: rgba(255, 255, 255, 0.5);
+    right:10px;
+    padding: 10px;
+    color: #C297D3!important;
+    fill: #C297D3 !important;
+    stroke: #C297D3 !important;
+} */
+
+/* #twitch-embed {
+  width: 500px;
+  height: 500px;
+} */
+
+@font-face {
+  font-family: Adonais;
+  src: url("./components//img/Adonais.ttf");
+}
+.font {
+  font-family: Adonais;
+}
+.image-gallery-image {
+  width: 100vw !important;
+  height: 80vh !important;
+  /*   object-fit: cover !important;
+ */
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* ola */
+
+.video {
+  width: 80% !important;
+  height: 100% !important;
+  margin: auto;
+}
+
+.image-gallery-thumbnail {
+  border-radius: 10px;
+  object-fit: cover !important;
+}
+
+.image-gallery-thumbnail-image {
+  border-radius: 7px;
+  object-fit: cover !important;
+  height: 100px !important;
+}
+
+.image-gallery-thumbnail:hover {
+  border: 3px solid #fff !important;
+  opacity: 50%;
+}
+
+.active {
+  border: 3px solid #c297d3 !important;
+}
+
+.MuiAccordionSummary-root {
+  box-shadow: none !important;
+  /* background-color: red !important; */
+  border: none !important;
+}
+
+.MuiButtonBase-root {
+  background-color: #7e21cd !important;
+  color: white !important;
+font-family: 'Adonais' !important;
+}
+.MuiTypography-root {
+  background-color: #7e21cd !important;
+  color: white !important;
+font-family: 'Adonais' !important;
+}
+.MuiSvgIcon-root {
+  color: white !important;
+}
+
+.MuiSlider-thumb {
+  color: black;
+}
+
+.MuiSlider-rail {
+  color: black;
+}
+
+.MuiSlider-track {
+  color: black;
+}
+
+.image-gallery-slide img {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* .react-carousel-responsive__control {
+display:none
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+.secondary-img {
+  opacity: 0.7;
+}
+
+#hover-img {
+  opacity: 1;
+}
+
+/* --------- */
+/*  Preloader */
+/* --------- */
+
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  background-image: url(./components/img/logo.jpg);
+  background-size: 8em;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 2s ease-in-out;
+  opacity: 100;
+  background-color: #0f121a;
+}
+
+/* .background {
+  background-image: url("./components/img/twitter_1.png") !important;
+} */
+
+#preloader-none {
+  transition: all 2s;
+  opacity: 0;
+}
+
+#no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-enter-active {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 500ms;
+}
+
+@keyframes scroller {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-400%);
+  }
+}
+
+.scrollingContent {
+  white-space: nowrap;
+  animation-duration: 20s;
+  animation-name: scroller;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
