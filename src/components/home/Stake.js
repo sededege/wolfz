@@ -200,7 +200,7 @@ const Staked = () => {
       setStake(test2.staked);
       setNfts([]);
       setNfts2([]);
-      for (let i = 1; i <= 15; i++) {
+      for (let i = 1; i <= 20; i++) {
         fetchnfts(i);
       }
       setTimeout(() => {
