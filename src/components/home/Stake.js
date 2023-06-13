@@ -59,7 +59,7 @@ const Staked = () => {
 
   const fetchnfts = async (num) => {
 
-    const options = {
+    /* const options = {
       method: 'POST',
       headers: {
         accept: 'application/json',
@@ -67,13 +67,27 @@ const Staked = () => {
         authorization: 'Bearer 41d5a889-a8e6-4f4d-9183-4d594ca01992'
       },
       body: JSON.stringify({
-         ownerAccount: publicKey && publicKey.toBase58(),
-         /* ownerAccount: 'BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o', */
+          ownerAccount: publicKey && publicKey.toBase58(), 
+         ownerAccount: 'DwyWVeKQvRTASoNR7nLYwGFiRcGNkWPiiD9Td2YJj3az',
         helloMoonCollectionId: 'aec8c053152b2f1b7dc01db7e298d571',
         page: num
       })
-    };
+    }; */
     
+
+    const options = {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        authorization: 'Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f'
+      },
+      body: JSON.stringify({
+         ownerAccount: publicKey && publicKey.toBase58(),
+/*         ownerAccount: 'DwyWVeKQvRTASoNR7nLYwGFiRcGNkWPiiD9Td2YJj3az',
+ */      
+      })
+    };
 
     const test = async (b,tokenAddress) => {
     const request = await fetch(b)
@@ -85,14 +99,15 @@ const Staked = () => {
     }
     )
     }
-    fetch('https://rest-api.hellomoon.io/v0/nft/mints-by-owner', options)
+    fetch('https://rest-api.hellomoon.io/v0/hello-moon/thesmorphia/owners', options)
       .then(response => response.json())
       .then(res => {
+        console.log(res)
+
         res.data.map(a => {
         /* setNfts((prev) => [...prev, a])
         setNfts2((prev) => [...prev, a]) */
-        test(a.metadataJson.uri, a.nftMint)
-
+        test(a.metadatajson.uri, a.mint)
         }
         )
       })
@@ -200,9 +215,9 @@ const Staked = () => {
       setStake(test2.staked);
       setNfts([]);
       setNfts2([]);
-      for (let i = 1; i <= 20; i++) {
-        fetchnfts(i);
-      }
+
+        fetchnfts();
+      
       setTimeout(() => {
         setLoading(false);
       }, 6000);
