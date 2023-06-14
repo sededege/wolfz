@@ -22,7 +22,8 @@ const Rewards = () => {
     "BZeYLWwXLzKBYA7E3om8J1ShmSZ2VQz2c19yM8RrMhe3",
     "AK3EpwLuTLsRqoMDz2hqCv5rq6tPfaWcVSNqKcrY7sGK",
     "z624HRfLVoPUCcGZmaRXctwzoYJ2qCmb1CxBHSbEKqn",
-    "HLvnJn6rspYZhWLLqcW657zBsRxUnsReB523BxL6Aqg1"
+    "HLvnJn6rspYZhWLLqcW657zBsRxUnsReB523BxL6Aqg1",
+    "8hsBqcv7ZBNqNpgcQPMGqafipYogi6pvfsScBwuWwWfh"
   ];
   const { publicKey } = useWallet();
   function writeUserData(

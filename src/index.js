@@ -30,6 +30,7 @@ const endpoint = 'https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd7
 
 const AppWithProvider = () => {
   const wallets = [new PhantomWalletAdapter(), new SlopeWalletAdapter(), new SolflareWalletAdapter()];
+  window.Buffer = require('buffer/').Buffer;
 
   return (
     <ConnectionProvider endpoint={endpoint}>

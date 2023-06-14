@@ -57,8 +57,7 @@ const Staked = () => {
     thes = thes + a;
   };
 
-  const fetchnfts = async (num) => {
-
+  const fetchnfts = async () => {
     /* const options = {
       method: 'POST',
       headers: {
@@ -73,47 +72,52 @@ const Staked = () => {
         page: num
       })
     }; */
-    
 
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        authorization: 'Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f'
+        accept: "application/json",
+        "content-type": "application/json",
+        authorization: "Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
       },
       body: JSON.stringify({
-         ownerAccount: publicKey && publicKey.toBase58(),
-/*         ownerAccount: 'DwyWVeKQvRTASoNR7nLYwGFiRcGNkWPiiD9Td2YJj3az',
- */      
-      })
+        ownerAccount: publicKey && publicKey.toBase58(),
+
+        /*   ownerAccount: 'BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o', */
+      }),
     };
 
-    const test = async (b,tokenAddress) => {
-    const request = await fetch(b)
-    .then(response => response.json())
-    .then(res =>  {
-
-      setNfts((prev) => [...prev,{imageUrl: res.image, name: res.name, tokenAddress: tokenAddress }])
-      setNfts2((prev) => [...prev,{imageUrl: res.image, name: res.name,tokenAddress: tokenAddress }])
-    }
+    const test = async (b, tokenAddress) => {
+      const request = await fetch(b)
+        .then((response) => response.json())
+        .then((res) => {
+          setNfts((prev) => [
+            ...prev,
+            { imageUrl: res.image, name: res.name, tokenAddress: tokenAddress },
+          ]);
+          setNfts2((prev) => [
+            ...prev,
+            { imageUrl: res.image, name: res.name, tokenAddress: tokenAddress },
+          ]);
+        });
+    };
+    fetch(
+      "https://rest-api.hellomoon.io/v0/hello-moon/thesmorphia/owners",
+      options
     )
-    }
-    fetch('https://rest-api.hellomoon.io/v0/hello-moon/thesmorphia/owners', options)
-      .then(response => response.json())
-      .then(res => {
-        console.log(res)
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res);
 
-        res.data.map(a => {
-        /* setNfts((prev) => [...prev, a])
+        res.data.map((a) => {
+          /* setNfts((prev) => [...prev, a])
         setNfts2((prev) => [...prev, a]) */
-        test(a.metadatajson.uri, a.mint)
-        }
-        )
+          test(a.metadatajson.uri, a.mint);
+        });
       })
-      .catch(err => console.error(err));
+      .catch((err) => console.error(err));
 
-   /*  const body = {
+    /*  const body = {
       method: "qn_fetchNFTs",
       params: {
         wallet: publicKey && publicKey.toBase58(),
@@ -176,11 +180,6 @@ const Staked = () => {
             })
         );
       }); */
-
-
-
-
-
   };
 
   const checkuser = async (a) => {
@@ -203,7 +202,6 @@ const Staked = () => {
     }
   };
 
-  
   useEffect(() => {
     const first = async () => {
       setAllUsers(await getAllUsuarios());
@@ -215,9 +213,7 @@ const Staked = () => {
       setStake(test2.staked);
       setNfts([]);
       setNfts2([]);
-
-        fetchnfts();
-      
+      fetchnfts();
       setTimeout(() => {
         setLoading(false);
       }, 6000);
@@ -273,12 +269,12 @@ const Staked = () => {
 
   const sendtostake = (a) => {
     if (a === "all") {
-      console.log(filtrar(stake))
+      console.log(filtrar(stake));
       const tostake = filtrar(stake).map((a) => ({
         ...a,
         snapshot: `${Date.now()}`,
         points: a.name && a.name.slice(0, 4) === "Ruby" ? 3 * qtyxhr : qtyxhr,
-    }));
+      }));
 
       const dataa = {
         id: publicKey && publicKey.toBase58(),
@@ -313,8 +309,9 @@ const Staked = () => {
         ...a,
         snapshot: `${Date.now()}`,
         points: a.name && a.name.slice(0, 4) === "Ruby" ? 3 * qtyxhr : qtyxhr,
-/*         blocknumber: a.provenance[0].blockNumber,
- */      }));
+        /*         blocknumber: a.provenance[0].blockNumber,
+         */
+      }));
 
       const data2 = {
         id: publicKey && publicKey.toBase58(),
@@ -335,10 +332,10 @@ const Staked = () => {
         ...a,
         snapshot: `${Date.now()}`,
         points: a.name && a.name.slice(0, 4) === "Ruby" ? 3 * qtyxhr : qtyxhr,
-       /*  blocknumber: a.provenance[0].blockNumber, */
+        /*  blocknumber: a.provenance[0].blockNumber, */
       }));
 
-      console.log(tostake)
+      console.log(tostake);
       const dataa = {
         id: publicKey && publicKey.toBase58(),
         staked: tostake.concat(stake),

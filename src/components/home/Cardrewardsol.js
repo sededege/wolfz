@@ -16,18 +16,22 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { getUser, updatePoints, getdata } from "../utils/firebaseFunctions";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import solscan from ".././img/solscan.png";
- import * as web3 from '@solana/web3.js';
-import { Buffer } from 'buffer';
+import * as web3 from "@solana/web3.js";
+import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { SendSolForm } from "./Sendsol";
 
 const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
-  global.Buffer = Buffer;
-  const { publicKey } = useWallet();
+  const Buffer = require("buffer").Buffer;
+  const { publicKey, sendTransaction } = useWallet();
   const [modal, setModal] = React.useState(false);
   const [modalsort, setModalSort] = React.useState(false);
   const [winners2, setWinners] = React.useState(false);
   const [data, setData] = React.useState([]);
   const [isVisible, setIsVisible] = React.useState(true);
-
+  const connection = new web3.Connection(
+    "https://rpc.hellomoon.io/b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
+    "confirmed"
+  );
   /*  const [qtysort, setQtySort] = React.useState(
     data && parseInt(data.qtywinners)
   ); */
@@ -44,39 +48,83 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
 
   const [count, setCount] = React.useState(0);
 
-  function UnitCounter() {
+  const UnitCounter = () => {
+    const [count2, setCount2] = React.useState(0);
+
     const handleIncrement = () => {
-      setCount(count + 1);
+      setCount2(count2 + 1);
     };
 
     const handleDecrement = () => {
-      if (count > 0) {
-        setCount(count - 1);
+      if (count2 > 0) {
+        setCount2(count2 - 1);
       }
     };
 
+    const handleInputChange = (event) => {
+      const inputValue = event.target.value;
+      const newCount = parseInt(inputValue);
+      if (!isNaN(newCount)) {
+        setCount2(newCount);
+      }
+    };
     return (
-      <div className="gap-2 flex">
+      <div className="gap-2 flex w-full">
         <button
-          className="bg-btn text-white p-2 rounded-lg "
-          onClick={handleDecrement}
+          className="bg-btn text-white p-2 rounded-lg"
+          onClick={() => handleDecrement()}
         >
           -
         </button>
         <input
-          className="w-[30px] text-center bg-transparent border-2 border-slate-500 rounded-lg text-white mx-auto"
+          className="w-[60px] text-center bg-transparent border-2 border-slate-500 rounded-lg text-white mx-auto"
           type="text"
-          defaultValue={count}
+          value={count2}
+          onChange={(e) => handleInputChange(e)}
         />
         <button
           className="bg-btn text-white p-2 rounded-lg"
-          onClick={handleIncrement}
+          onClick={() => handleIncrement()}
         >
           +
         </button>
+        <button
+          onClick={() => sendSol(id, count2)}
+          className="bg-yellow-300 text-tesmo font-semibold hover:bg-tesmo2 border-2 border-yellow-300 hover:border-tesmo2 hover:text-white w-full rounded-lg text-center p-2 cursor-pointer"
+        >
+          Buy with Sol
+        </button>
       </div>
     );
-  }
+  };
+
+  const sendSol = (id, count2) => {
+    if (!connection || !publicKey) {
+      return;
+    }
+    const transaction = new web3.Transaction();
+    const recipientPubKey = new web3.PublicKey(
+      "9iHKDvQnnvjfKnxbdA2spvr7brtrqNWwg1NWvWvK36KT"
+    );
+
+    const sendSolInstruction = web3.SystemProgram.transfer({
+      fromPubkey: publicKey,
+      toPubkey: recipientPubKey,
+      lamports: LAMPORTS_PER_SOL * count2 * data.price,
+    });
+
+    transaction.add(sendSolInstruction);
+    sendTransaction(transaction, connection)
+      .then((res) => {
+        // Process the response or do any necessary operations
+        updaterealtime(id, count2);
+        // Call another function if the user approves the transaction
+      })
+      .catch((err) => {
+        // Handle any errors that may occur during the transaction process
+        console.error("CANCELADO");
+      });
+  };
 
   const getrealtime = (postId) => {
     const starCountRef = ref(database, "raffles/" + postId + "/sales");
@@ -85,42 +133,14 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
     });
   };
 
-  function updaterealtime(uid) {
-  
-
-   
-
-    (async () => {
-      // Connect to cluster
-      var connection = new web3.Connection(web3.clusterApiUrl("devnet"));
-      // Construct a `Keypair` from secret key
-      var from = web3.Keypair.generate();
-      // Generate a new random public key
-      var to = web3.Keypair.generate();
-      // Add transfer instruction to transaction
-      var transaction = new web3.Transaction().add(
-          web3.SystemProgram.transfer({
-              fromPubkey: from.publicKey,
-              toPubkey: to.publicKey,
-              lamports: web3.LAMPORTS_PER_SOL / 100,
-          })
-      );
-      // Sign transaction, broadcast, and confirm
-      var signature = await web3.sendAndConfirmTransaction(
-          connection,
-          transaction,
-          [from]
-      );
-      console.log("SIGNATURE", signature);
-      console.log("SUCCESS");
-  })();
-
-    if (pointsuser - data.price * count >= 0) {
-      /*    const datapoints = {
+  function updaterealtime(uid, count2) {
+    console.log(count2);
+    if (pointsuser - data.price * count2 >= 0) {
+      const datapoints = {
         id: publicKey && publicKey.toBase58(),
-        points: pointsuser - (data.price*count),
+        points: pointsuser - data.price * count2,
       };
-      updatePoints(datapoints); */
+      updatePoints(datapoints);
 
       setBuying(true);
       setTimeout(() => {
@@ -129,8 +149,8 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
       // Write the new post's data simultaneously in the posts list and the user's post list.
       const updates = {};
       let qty = [];
-      for (let index = 0; index < count; index++) {
-        qty.push(publicKey.toBase58());
+      for (let index = 0; index < count2; index++) {
+        qty.push(publicKey?.toBase58());
       }
       /*  console.log(qty)
       console.log(real) */
@@ -153,7 +173,6 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
   function updaterealtimeespecial(uid) {
     // Write the new post's data simultaneously in the posts list and the user's post list.
     const updates = {};
-    console.log(real);
     const news = real.filter(
       (a) => !a.includes("AK3EpwLuTLsRqoMDz2hqCv5rq6tPfaWcVSNqKcrY7sGK")
     );
@@ -215,7 +234,7 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
   }
 
   const asd = async () => {
-    setUser(await getUser(publicKey.toBase58()));
+    setUser(await getUser(publicKey?.toBase58()));
   };
 
   const getdata = (userId) => {
@@ -239,11 +258,11 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
 
     publicKey && asd();
 
-    const intervalId = setInterval(() => {
+    /*  const intervalId = setInterval(() => {
       setIsVisible((prevState) => !prevState);
     }, 500);
 
-    return () => clearInterval(intervalId);
+    return () => clearInterval(intervalId); */
   }, [publicKey]);
 
   const sort = (real) => {
@@ -312,7 +331,90 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
   return (
     <>
       {data.state === "live" && data.type === "solana" && (
-        <div className="bg-tesmo border-2 border-purple-500 bg-opacity-80 rounded-lg p-4">
+        <div className="bg-tesmo bg-opacity-80 border-2 border-purple-400 rounded-lg p-4">
+          {modal && (
+            <div className=" px-4 md:w-[700px] h-[400px] bg-tesmo2  text-white opacity-95 md:left-[calc(50vw-350px)] md:top-[calc(50vh-200px)] fixed overflow-auto p-8 rounded-lg ">
+              <button
+                onClick={() => setModal(!modal)}
+                className="absolute right-10 top-4"
+              >
+                X
+              </button>
+              <h1 className="font-bold">
+                {data.winner ? "Winners" : "Entries"}
+              </h1>
+              <ul>
+                {!data.winner ? (
+                  real.map((a, index) => (
+                    <li key={index}>
+                      {index + 1} - {a}...
+                    </li>
+                  ))
+                ) : (
+                  <li>
+                    <ul className="gap-4 p-2  flex flex-col">
+                      {data.winner.map((a, index) => (
+                        <li
+                          key={index}
+                          className="justify-between bg-tesmo  w-full p-2 items-center flex "
+                        >
+                          <div>{a.name.slice(0, 20)}...</div>
+                          {/*                       <div>{a.transaction}</div>
+                           */}{" "}
+                          {a.transaction !== "" ? (
+                            <a href={a.transaction}>
+                              <img src={solscan} className="w-6" />
+                            </a>
+                          ) : publicKey &&
+                            whitelist.includes(
+                              publicKey && publicKey?.toBase58()
+                            ) ? (
+                            <div className="flex items-center justify-center">
+                              <InputTx index={index} />
+                            </div>
+                          ) : (
+                            <p className="text-red-500 text-[0.8rem]">
+                              Prize not delivered yet
+                            </p>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
+
+          {modalsort && (
+            <div className="p-20 bg-tesmo fixed opacity-95 border-2 left-[calc(50vw-250px)] overflow-auto p-8 rounded-lg ">
+              <button
+                onClick={() => setModalSort(!modalsort)}
+                className="absolute right-10 top-4 text-white"
+              >
+                X
+              </button>
+              {/*  <input
+            type="number"
+            value={qtysort}
+            onChange={(e) => setQtySort(e.target.value)}
+            className="bg-white p-2 rounded-lg "
+            placeholder="Qty of winners"
+          /> */}
+              <button
+                onClick={() => sort(real)}
+                className=" p-2 ml-2 rounded-lg bg-tesmo2 text-white"
+              >
+                Sort
+              </button>
+              <ul className="mt-2 text-white">
+                {winners2 &&
+                  winners2.map((a, index) => <li key={index}>{a}</li>)}
+              </ul>
+            </div>
+          )}
+          {/*       <Tweet tweetId="1624841242055004161" options={{ theme: "dark" }} />
+           */}
           <div className="flex justify-between items-center">
             {whitelist.includes(publicKey && publicKey.toBase58()) && (
               <button
@@ -322,10 +424,8 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
                 Delete
               </button>
             )}
-            <p className="text-white font-bold mb-4 text-[1rem]">
-              Raffle # {number + 1}{" "}
-            </p>
-            <h1 className="text-white font-bold mb-4 flex gap-2  text-[1rem]">
+            <p className="text-white font-bold mb-4">Raffle # {number + 1} </p>
+            <p className="text-white font-bold mb-4 flex gap-2">
               Live{" "}
               <div className="w-2">
                 <span
@@ -334,7 +434,7 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
                   }`}
                 />
               </div>
-            </h1>
+            </p>
           </div>
           <img src={data && data.image} className="rounded-lg w-180" />
 
@@ -349,7 +449,7 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
             <span className="font-bold">Price:</span>
             <div className="flex items-center gap-2 justify-center">
               <GiTwoCoins className="text-purple-500 text-[1.2rem]" />
-              <p className="text-yellow-300 font-bold">{data.price} SOL</p>
+              <p className="text-yellow-300 font-bold">{data.price}</p>
             </div>
           </div>
           <div className="text-center text-[0.8rem] justify-between flex px-4 text-slate-400 mt-2 mb-2">
@@ -362,8 +462,9 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
                   parseInt(data?.snapshot) + parseInt(data?.time)
                   /*  Date.now() + 10000 */
                 }
-/*                 onComplete={() => sort(real)}
- */              />
+                /*                 onComplete={() => sort(real)}
+                 */
+              />
             )}
 
             {/*  <Countdown
@@ -421,12 +522,6 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
               ) : (
                 <div className="flex items-center gap-2">
                   <UnitCounter />
-                  <button
-                    onClick={() => updaterealtime(id)}
-                    className="bg-yellow-300 text-tesmo font-semibold hover:bg-tesmo2 border-2 border-yellow-300 hover:border-tesmo2 hover:text-white w-full rounded-lg text-center p-2 cursor-pointer"
-                  >
-                    Buy in SOL
-                  </button>
                   {/*   <button
                 onClick={() => updaterealtimeespecial(id)}
                 className="bg-yellow-300 text-tesmo font-semibold hover:bg-tesmo2 border-2 border-yellow-300 hover:border-tesmo2 hover:text-white w-full rounded-lg text-center p-2 cursor-pointer"
@@ -442,7 +537,14 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
                 </button>
               )
             )}
-
+            {whitelist.includes(publicKey?.toBase58()) && (
+              <button
+                onClick={() => sort(real)}
+                className="bg-orange-500 text-[0.8rem] font-semibold text-tesmo w-full rounded-lg text-center p-2 cursor-pointer"
+              >
+                Sort a winner
+              </button>
+            )}
             {whitelist.includes(publicKey?.toBase58()) && (
               <div className="flex gap-2">
                 {/*  <button
