@@ -39,7 +39,7 @@ const Staked = () => {
   const [loading2, setLoading2] = useState(true);
   const [msg, setMsg] = useState(true);
   let qtyxhr = 10;
-  let supply = 5287;
+  let supply = 5100;
   const [update, setUpdate] = useState();
   let puntoss = 0;
   let thes = 0;
@@ -81,10 +81,9 @@ const Staked = () => {
         authorization: "Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
       },
       body: JSON.stringify({
-                ownerAccount: publicKey && publicKey.toBase58(),
-        
+        ownerAccount: publicKey && publicKey.toBase58(),
+
         /* ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o", */
-        
       }),
     };
 
@@ -220,7 +219,7 @@ const Staked = () => {
       }, 4000);
     };
 
-   /*  allusers &&
+    /*  allusers &&
       allusers.map((a) => {
         const dataa = {
           id: a.id,
@@ -432,7 +431,7 @@ const Staked = () => {
               <div className="w-full  flex items-center flex-col gap-2 mb-4 bg-tesmo bg-opacity-80 rounded-lg px-4 py-2 shadow-purple-700 shadow-lg">
                 {/*           <h1 className="text-white menu text-[1rem] font ">Vault</h1>
                  */}{" "}
-               {/*  {allusers &&
+                 {allusers &&
                   allusers.map(
                     (b) => b.staked && calculatestake(b.staked.length)
                   )}
@@ -441,9 +440,14 @@ const Staked = () => {
                     ? Math.round((100 * totalstaked) / supply)
                     : 0}{" "}
                   %
+                </p>
+               {/*  <p className="text-yellow-400 text-center ">
+                  We apologize for the lock system issue. Rest assured, all
+                  accounts and NFT stakes are being restored. Your points are
+                  safe, and please avoid pressing any buttons in that platform
+                  section. Thank you for your patience. If you have any
+                  questions, feel free to ask on Discord or dm me #rkz4276 .
                 </p> */}
-                <p className="text-yellow-400 text-center ">
-                We apologize for the lock system issue. Rest assured, all accounts and NFT stakes are being restored. Your points are safe, and please avoid pressing any buttons in that platform section. Thank you for your patience. If you have any questions, feel free to ask on Discord or dm me #rkz4276 .                </p>
                 <ProgressBar
                   progress={
                     totalstaked > 0

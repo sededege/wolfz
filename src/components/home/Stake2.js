@@ -39,7 +39,7 @@ const Staked = () => {
   const [loading2, setLoading2] = useState(true);
   const [msg, setMsg] = useState(true);
   let qtyxhr = 10;
-  let supply = 5287;
+  let supply = 5100;
   const [update, setUpdate] = useState();
   let puntoss = 0;
   let thes = 0;
@@ -57,22 +57,11 @@ const Staked = () => {
     thes = thes + a;
   };
 
-  const fetchnfts = async () => {
-    /* const options = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        authorization: 'Bearer 41d5a889-a8e6-4f4d-9183-4d594ca01992'
-      },
-      body: JSON.stringify({
-          ownerAccount: publicKey && publicKey.toBase58(), 
-         ownerAccount: 'DwyWVeKQvRTASoNR7nLYwGFiRcGNkWPiiD9Td2YJj3az',
-        helloMoonCollectionId: 'aec8c053152b2f1b7dc01db7e298d571',
-        page: num
-      })
-    }; */
+  const [count, setCount] = useState(426);
 
+  
+
+  const fetchnfts = async (id) => {
     const options = {
       method: "POST",
       headers: {
@@ -81,17 +70,19 @@ const Staked = () => {
         authorization: "Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
       },
       body: JSON.stringify({
-        /*         ownerAccount: publicKey && publicKey.toBase58(),
-         */
-        ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o",
-        
-      }),
+        /*       ownerAccount: publicKey && publicKey.toBase58(), */
+        ownerAccount: id,
+/*         ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o",
+ */      }),
     };
+
+    console.log(id)
 
     const test = async (b, tokenAddress) => {
       const request = await fetch(b)
         .then((response) => response.json())
         .then((res) => {
+
           setNfts((prev) => [
             ...prev,
             { imageUrl: res.image, name: res.name, tokenAddress: tokenAddress },
@@ -108,79 +99,13 @@ const Staked = () => {
     )
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
+        console.log('resultado', res)
 
         res.data.map((a) => {
-          /* setNfts((prev) => [...prev, a])
-        setNfts2((prev) => [...prev, a]) */
           test(a.metadatajson.uri, a.mint);
         });
       })
       .catch((err) => console.error(err));
-
-    /*  const body = {
-      method: "qn_fetchNFTs",
-      params: {
-        wallet: publicKey && publicKey.toBase58(),
-             wallet: "FKTA8fh6rhirjgjusihA2ctu6nKYdyWnHE95wqnEG3qq", 
-        
-     
-        page: num,
-        perPage: 40,
-        omitFields: ['collectionName','traits','creators','provenance','network','chain']
-
-      },
-    };
-
-    const options = {
-      method: "POST",
-      body: JSON.stringify(body),
-    };
-    const endpoints = [
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-    ];
-
-    return await fetch(endpoints[num], options)
-      .then((res) => res.json())
-      .then((res) => {
-        return (
-          res &&
-          res.result &&
-          res.result.assets
-            .filter(
-              (b) =>
-                b.collectionAddress ===
-                "HNvbqajUp8tYYRRBwm4cqeRQRbahLLTSLdvgi6QzM4cB"
-            ) .map((a) => {
-              setNfts((prev) => [...prev, a]);
-              setNfts2((prev) => [...prev, a]);
-            })
-        );
-      }); */
   };
 
   const checkuser = async (a) => {
@@ -208,56 +133,88 @@ const Staked = () => {
       setAllUsers(await getAllUsuarios());
     };
     first();
-    /*     const asd = async () => {
+    const asd = async () => {
       const test2 = await checkuser(publicKey && publicKey.toBase58());
       setUser(test2);
       setStake(test2.staked);
       setNfts([]);
       setNfts2([]);
-      fetchnfts();
+      /*  fetchnfts(); */
       setTimeout(() => {
         setLoading(false);
       }, 4000);
-    }; */
-    setLoading(false);
-    let array = [];
+    };
 
-    /*  fetchnfts(allusers[100].id)
-      const dataa = {
-       id: allusers[100].id,
-       staked: nfts2,
-       snapshot: `${Date.now()}`,
-     };
-     array.push(dataa)
-      
-     console.log(nfts2)
-      console.log(array) */
+    /*  allusers &&
+      allusers.map((a) => {
+        const dataa = {
+          id: a.id,
+          staked: [],
+          snapshot: `${Date.now()}`,
+        };
+        updateNfts(dataa);
+      }); */
 
-    /*  setInterval(() => {
+    setInterval(() => {
       setProgress((prevProgress) =>
         prevProgress >= 100 ? 0 : prevProgress + 10
       );
     }, 1000);
 
-    publicKey ? asd() : setLoading(false); */
-  }, []);
+    publicKey ? asd() : setLoading(false);
+  }, [publicKey, claimed]);
 
-  const stakeagain = async () => {
-    let array = [];
 
-    fetchnfts();
-    const dataa = {
-      id: allusers[100].id,
-      staked: nfts2,
-      snapshot: `${Date.now()}`,
+  const Puntos = () => {
+
+    const incrementCount = () => {
+     
+   
+      setCount(count + 1);
     };
-    array.push(dataa);
 
-    console.log(array);
+    const decrementCount = () => {
+     
+   
+      count > 0 && setCount(count - 1);
+    };
+
+    const search = () => {
+      setNfts([]);
+      setNfts2([]);
+      setStake([]);
+      fetchnfts(allusers && allusers[count].id);
+
+    }
+
+
+    return (
+      <div className="text-[0.8rem] text-white">
+        <p>Index: {count}</p>
+{/*         <p>Wallet: {allusers && allusers[count].id}</p>
+ */}        <button
+          className="p-2 bg-white text-black "
+          onClick={() => incrementCount()}
+        >
+          Sumar
+        </button>
+        <button
+          className="p-2 bg-white ml-4  text-black"
+          onClick={() => decrementCount()}
+        >
+          Restar
+        </button>
+        <button
+          className="p-2 bg-white ml-4  text-black"
+          onClick={() => search()}
+        >
+         Buscar
+        </button>
+      </div>
+    );
   };
-
-  console.log(nfts2)
-
+  
+  console.log(allusers.length)
   const updatestake = (a) => {
     let result = [];
 
@@ -283,7 +240,7 @@ const Staked = () => {
     const result = diferenciaEnHoras * (points / 24);
     /* const result = diferenciaEnHoras * (points / 1000); */
     /*  console.log(points) */
-    /*     puntoss = puntoss + result;fetch
+    /*     puntoss = puntoss + result;
      */ puntoss = puntoss + result;
   };
 
@@ -309,7 +266,7 @@ const Staked = () => {
       }));
 
       const dataa = {
-        id: publicKey && publicKey.toBase58(),
+        id: allusers && allusers[count].id,
         staked: tostake.concat(stake),
         snapshot: user.staked.length > 0 ? user.snapshot : `${Date.now()}`,
       };
@@ -317,6 +274,7 @@ const Staked = () => {
       updateNfts(dataa);
       setStake(tostake.concat(stake));
       setUpdate(!update);
+
     } else if (a === "unstakeall") {
       stake && stake.map((e) => setNfts((prev) => [...prev, e]));
       const dataa = {
@@ -449,6 +407,7 @@ const Staked = () => {
           <>
             <div className="px-4 md:px-0">
               <div className="w-full  flex items-center flex-col gap-2 mb-4 bg-tesmo bg-opacity-80 rounded-lg px-4 py-2 shadow-purple-700 shadow-lg">
+                <Puntos />
                 {/*           <h1 className="text-white menu text-[1rem] font ">Vault</h1>
                  */}{" "}
                 {allusers &&
@@ -461,6 +420,9 @@ const Staked = () => {
                     : 0}{" "}
                   %
                 </p>
+                {/*  <p className="text-yellow-400 text-center ">
+                We apologize for the lock system issue. Rest assured, all accounts and NFT stakes are being restored. Your points are safe, and please avoid pressing any buttons in that platform section. Thank you for your patience. If you have any questions, feel free to ask on Discord or dm me #rkz4276 .              
+                  </p> */}
                 <ProgressBar
                   progress={
                     totalstaked > 0
@@ -584,10 +546,10 @@ const Staked = () => {
                           Lock
                         </button>
                         <button
-                          onClick={() => stakeagain()}
+                          onClick={() => sendtostake("all")}
                           className="text-white px-8 py-2 rounded-lg md:text-[0.6rem] lg:text-[1rem] border-2 font border-btn hover:bg-white hover:text-btn bg-btn cursor-pointer text-[1rem]"
                         >
-                          STAKE AGAIN
+                          Lock All
                         </button>
                       </div>
                     </div>
