@@ -193,7 +193,6 @@ export const getUser = async (a) => {
 
 export const getAllUsuarios = async () => {
   const usuarios = await getDocs(query(collection(firestore, "user")));
-
   return usuarios.docs.map((doc) => doc.data());
 };
 

@@ -81,9 +81,9 @@ const Staked = () => {
         authorization: "Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
       },
       body: JSON.stringify({
-                ownerAccount: publicKey && publicKey.toBase58(),
-        
-        /* ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o", */
+        /*         ownerAccount: publicKey && publicKey.toBase58(),
+         */
+        ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o",
         
       }),
     };
@@ -208,7 +208,7 @@ const Staked = () => {
       setAllUsers(await getAllUsuarios());
     };
     first();
-    const asd = async () => {
+    /*     const asd = async () => {
       const test2 = await checkuser(publicKey && publicKey.toBase58());
       setUser(test2);
       setStake(test2.staked);
@@ -218,26 +218,45 @@ const Staked = () => {
       setTimeout(() => {
         setLoading(false);
       }, 4000);
-    };
+    }; */
+    setLoading(false);
+    let array = [];
 
-   /*  allusers &&
-      allusers.map((a) => {
-        const dataa = {
-          id: a.id,
-          staked: [],
-          snapshot: `${Date.now()}`,
-        };
-        updateNfts(dataa);
-      }); */
+    /*  fetchnfts(allusers[100].id)
+      const dataa = {
+       id: allusers[100].id,
+       staked: nfts2,
+       snapshot: `${Date.now()}`,
+     };
+     array.push(dataa)
+      
+     console.log(nfts2)
+      console.log(array) */
 
-    setInterval(() => {
+    /*  setInterval(() => {
       setProgress((prevProgress) =>
         prevProgress >= 100 ? 0 : prevProgress + 10
       );
     }, 1000);
 
-    publicKey ? asd() : setLoading(false);
-  }, [publicKey, claimed]);
+    publicKey ? asd() : setLoading(false); */
+  }, []);
+
+  const stakeagain = async () => {
+    let array = [];
+
+    fetchnfts();
+    const dataa = {
+      id: allusers[100].id,
+      staked: nfts2,
+      snapshot: `${Date.now()}`,
+    };
+    array.push(dataa);
+
+    console.log(array);
+  };
+
+  console.log(nfts2)
 
   const updatestake = (a) => {
     let result = [];
@@ -264,7 +283,7 @@ const Staked = () => {
     const result = diferenciaEnHoras * (points / 24);
     /* const result = diferenciaEnHoras * (points / 1000); */
     /*  console.log(points) */
-    /*     puntoss = puntoss + result;
+    /*     puntoss = puntoss + result;fetch
      */ puntoss = puntoss + result;
   };
 
@@ -432,7 +451,7 @@ const Staked = () => {
               <div className="w-full  flex items-center flex-col gap-2 mb-4 bg-tesmo bg-opacity-80 rounded-lg px-4 py-2 shadow-purple-700 shadow-lg">
                 {/*           <h1 className="text-white menu text-[1rem] font ">Vault</h1>
                  */}{" "}
-               {/*  {allusers &&
+                {allusers &&
                   allusers.map(
                     (b) => b.staked && calculatestake(b.staked.length)
                   )}
@@ -441,9 +460,7 @@ const Staked = () => {
                     ? Math.round((100 * totalstaked) / supply)
                     : 0}{" "}
                   %
-                </p> */}
-                <p className="text-yellow-400 text-center ">
-                We apologize for the lock system issue. Rest assured, all accounts and NFT stakes are being restored. Your points are safe, and please avoid pressing any buttons in that platform section. Thank you for your patience. If you have any questions, feel free to ask on Discord or dm me #rkz4276 .                </p>
+                </p>
                 <ProgressBar
                   progress={
                     totalstaked > 0
@@ -567,10 +584,10 @@ const Staked = () => {
                           Lock
                         </button>
                         <button
-                          onClick={() => sendtostake("all")}
+                          onClick={() => stakeagain()}
                           className="text-white px-8 py-2 rounded-lg md:text-[0.6rem] lg:text-[1rem] border-2 font border-btn hover:bg-white hover:text-btn bg-btn cursor-pointer text-[1rem]"
                         >
-                          Lock All
+                          STAKE AGAIN
                         </button>
                       </div>
                     </div>
