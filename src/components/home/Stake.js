@@ -600,7 +600,7 @@ const Staked = () => {
                       </div>
                     </div> */}
 
-                    {hours(user && user.snapshot) <= 24 ? (
+                    {hours(user && user.snapshot) >= 24 ? (
                       claimed ? (
                         <button className="text-white px-2 md:px-8 py-2 rounded-lg border-2 border-slate-700 hover:bg-white hover:text-slate-700 bg-slate-700 cursor-pointer font text-[1rem]">
                           Claimed
