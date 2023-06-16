@@ -398,8 +398,8 @@ const news = real.filter(a => !a.includes('AK3EpwLuTLsRqoMDz2hqCv5rq6tPfaWcVSNqK
           <div className="text-center text-[0.8rem]  justify-between flex px-4 text-slate-400 mt-2 mb-2">
             <span className="font-bold">Price:</span>
             <div className="flex items-center gap-2 justify-center">
-              <GiTwoCoins className="text-purple-500 text-[1.2rem]" />
-              <p className="text-yellow-300 font-bold">{data.price}</p>
+              <GiTwoCoins className="text-yellow-500 text-[1.2rem]" />
+              <p className="text-yellow-500 font-bold">{data.price}</p>
             </div>
           </div>
           <div className="text-center text-[0.8rem] justify-between flex px-4 text-slate-400 mt-2 mb-2">

@@ -470,8 +470,8 @@ const Staked = () => {
                         Balance
                       </h2>
                       <div className="flex  items-center gap-2 ">
-                        <GiTwoCoins className="text-yellow-300 font text-[1.4rem]" />
-                        <p className="text-purple-500 font text-[1.2rem]">
+                        <GiTwoCoins className="text-yellow-500 font text-[1.4rem]" />
+                        <p className="text-yellow-500 font text-[1.2rem]">
                           {" "}
                           {user ? Math.round(user.points) : 0}
                         </p>
@@ -506,7 +506,7 @@ const Staked = () => {
                             <p className="text-white text-center text-[0.9rem] mt-2">
                               {a.name}
                             </p>
-                            <div className="text-center text-yellow-300  text-[0.7rem] font-bold flex justify-center  items-center gap-2 ">
+                            <div className="text-center text-yellow-500  text-[0.7rem] font-bold flex justify-center  items-center gap-2 ">
                               <GiTwoCoins />{" "}
                               {a.name && a.name.slice(0, 4) === "Ruby"
                                 ? 3 * qtyxhr
@@ -657,7 +657,7 @@ const Staked = () => {
                             </p>
                             <div className="text-center text-yellow-300 font-bold flex justify-center  items-center gap-2 ">
                               <GiTwoCoins />{" "}
-                              <p className="text-purple-400 font text-[1rem]">
+                              <p className="text-yellow-500 font text-[1rem]">
                                 {a.points}
                               </p>
                             </div>
@@ -713,7 +713,7 @@ const Staked = () => {
                       </div>
                       <div className="flex  items-center gap-2 ">
                         <GiTwoCoins className="text-yellow-300 font text-[1.4rem]" />
-                        <p className="text-purple-500 font text-[1rem]">
+                        <p className="text-yellow-500 font text-[1rem]">
                           {stake &&
                             updatestake(stake).map((a) =>
                               pointsearn2(a.points)

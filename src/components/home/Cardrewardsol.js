@@ -451,8 +451,8 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
           <div className="text-center text-[0.8rem]  justify-between flex px-4 text-slate-400 mt-2 mb-2">
             <span className="font-bold">Price:</span>
             <div className="flex items-center gap-2 justify-center">
-              <GiTwoCoins className="text-purple-500 text-[1.2rem]" />
-              <p className="text-yellow-300 font-bold">{data.price}</p>
+              <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt='sollogo' className="w-4 h-4"></img>
+              <p className="text-purple-400 font-bold">{data.price}</p>
             </div>
           </div>
           <div className="text-center text-[0.8rem] justify-between flex px-4 text-slate-400 mt-2 mb-2">
