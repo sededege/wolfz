@@ -25,7 +25,9 @@ const Rewards = () => {
     "HLvnJn6rspYZhWLLqcW657zBsRxUnsReB523BxL6Aqg1",
     "8hsBqcv7ZBNqNpgcQPMGqafipYogi6pvfsScBwuWwWfh"
   ];
+
   const { publicKey } = useWallet();
+  
   function writeUserData(
     tokenAddress,
     name,

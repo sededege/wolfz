@@ -44,6 +44,7 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
     "BZeYLWwXLzKBYA7E3om8J1ShmSZ2VQz2c19yM8RrMhe3",
     "AK3EpwLuTLsRqoMDz2hqCv5rq6tPfaWcVSNqKcrY7sGK",
     "z624HRfLVoPUCcGZmaRXctwzoYJ2qCmb1CxBHSbEKqn",
+    '8hsBqcv7ZBNqNpgcQPMGqafipYogi6pvfsScBwuWwWfh'
   ];
 
   const [count, setCount] = React.useState(0);
@@ -103,15 +104,17 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
       return;
     }
     const transaction = new web3.Transaction();
+
     const recipientPubKey = new web3.PublicKey(
-      "9iHKDvQnnvjfKnxbdA2spvr7brtrqNWwg1NWvWvK36KT"
+      "cTkZEfSvm2bkDrxejQemEp7bdQtLgRAUwGqt56Eai1w"
     );
 
     const sendSolInstruction = web3.SystemProgram.transfer({
       fromPubkey: publicKey,
       toPubkey: recipientPubKey,
       lamports: LAMPORTS_PER_SOL * count2 * data.price,
-    });
+/*       lamports: LAMPORTS_PER_SOL * count2 * data.price,
+ */    });
 
     transaction.add(sendSolInstruction);
     sendTransaction(transaction, connection)
