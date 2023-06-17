@@ -82,10 +82,10 @@ const Staked = () => {
         authorization: "Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
       },
       body: JSON.stringify({
-/*         ownerAccount: publicKey && publicKey.toBase58(),
- */
-        ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o",
-      }),
+        ownerAccount: publicKey && publicKey.toBase58(),
+
+/*         ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o",
+ */      }),
     };
 
     const test = async (b, tokenAddress) => {
