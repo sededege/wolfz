@@ -86,7 +86,7 @@ const Cardreward = ({ id, pointsuser, upd, number }) => {
     if (pointsuser - (data.price*count2) >= 0) {
       const datapoints = {
         id: publicKey && publicKey.toBase58(),
-        points: pointsuser - (data.price*count2),
+        points: Math.floor(parseInt(pointsuser)) - (data.price*count2),
       };
       updatePoints(datapoints);
 
