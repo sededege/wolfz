@@ -43,6 +43,7 @@ const Staked = () => {
   const [update, setUpdate] = useState();
   let puntoss = 0;
   let thes = 0;
+  let thes2 = 0;
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
   const { publicKey } = useWallet();
@@ -81,9 +82,9 @@ const Staked = () => {
         authorization: "Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
       },
       body: JSON.stringify({
-        ownerAccount: publicKey && publicKey.toBase58(),
-
-        /* ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o", */
+/*         ownerAccount: publicKey && publicKey.toBase58(),
+ */
+        ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o",
       }),
     };
 
@@ -264,9 +265,33 @@ const Staked = () => {
     /* const result = diferenciaEnHoras * (points / 1000); */
     /*  console.log(points) */
     /*     puntoss = puntoss + result;
-     */ puntoss = puntoss + result;
+     */
+    
+    puntoss =  Math.floor(puntoss) + Math.floor(result);
+
+
   };
 
+  const pointsearn3 = (a, points) => {
+    const d = new Date();
+
+    const fecha2 = parseInt(a);
+
+    const fecha1 = Date.now();
+
+    const diferenciaEnMilisegundos = Math.abs(fecha2 - fecha1);
+    const diferenciaEnHoras = diferenciaEnMilisegundos / (1000 * 60 * 60);
+
+    const result = diferenciaEnHoras * (points / 24);
+    /* const result = diferenciaEnHoras * (points / 1000); */
+    /*  console.log(points) */
+    /*     puntoss = puntoss + result;
+     */
+    
+    thes2 = thes2 + Math.floor(result);
+
+  
+  };
   const hours = (a) => {
     const d = new Date();
 
@@ -308,7 +333,7 @@ const Staked = () => {
       setStake([]);
     } else if (a === "claimall") {
       let result = [];
-      updatestake(stake).map((a) => pointsearn(a.snapshot, a.points));
+      updatestake(stake).map((a) => pointsearn(a.snapshot, Math.floor(parseInt(a.points))));
       setClaimed(true);
 
       nfts2.forEach((e) =>
@@ -333,7 +358,7 @@ const Staked = () => {
 
       const datapoints = {
         id: publicKey && publicKey.toBase58(),
-        points: user.points + puntoss,
+        points: Math.floor(parseInt(user.points)) + puntoss,
       };
       updateNfts(data2);
       updatePoints(datapoints);
@@ -513,6 +538,7 @@ const Staked = () => {
                                 : qtyxhr}{" "}
                               / Day
                             </div>
+                           
                           </motion.div>
                         ))
                       ) : (
@@ -721,6 +747,18 @@ const Staked = () => {
                           {thes} <span className="text-slate-300">/ day</span>
                         </p>
                       </div>
+                      <div className="text-center text-yellow-500 font  text-[1rem] font-bold flex justify-center  items-center gap-2 ">
+                              {stake &&
+                            updatestake(stake).map((a) =>
+                              pointsearn3(a.snapshot, a.points)
+                            )}
+                            <p className="text-white">
+                            Total:
+                            </p>
+                            <GiTwoCoins />{" "}
+                              <p > {thes2} </p>
+                              </div>
+                     
                     </div>
                   </div>
                 </div>

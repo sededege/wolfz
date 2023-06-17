@@ -11,6 +11,8 @@ import { data } from "browserslist";
 import { AnimatePresence, motion } from "framer-motion";
 import logo from "../img/logo.jpg";
 import Cardrewardsol from "./Cardrewardsol";
+import Sendpoints from "./Sendpoints";
+
 const Rewards = () => {
   const [user, setUser] = React.useState(null);
   const [dataall, setDataall] = React.useState([]);
@@ -23,11 +25,11 @@ const Rewards = () => {
     "AK3EpwLuTLsRqoMDz2hqCv5rq6tPfaWcVSNqKcrY7sGK",
     "z624HRfLVoPUCcGZmaRXctwzoYJ2qCmb1CxBHSbEKqn",
     "HLvnJn6rspYZhWLLqcW657zBsRxUnsReB523BxL6Aqg1",
-    "8hsBqcv7ZBNqNpgcQPMGqafipYogi6pvfsScBwuWwWfh"
+    "8hsBqcv7ZBNqNpgcQPMGqafipYogi6pvfsScBwuWwWfh",
   ];
 
   const { publicKey } = useWallet();
-  
+
   function writeUserData(
     tokenAddress,
     name,
@@ -292,22 +294,26 @@ const Rewards = () => {
               <h1 className="font text-[1.4rem]  text-white ">Balance</h1>
               <GiTwoCoins className="ml-4 text-yellow-400 font text-[1.2rem]" />
               <p className="text-yellow-400 font text-[1.2rem] ml-2">
-                {user &&  user.points ? Math.round(user.points) : 0}
+                {user && user.points ? Math.round(user.points) : 0}
               </p>
               <GiTwoCoins className="ml-4 text-red-500 font text-[1.2rem]" />
               <p className="text-red-500 font text-[1.2rem] ml-2">
                 {user && user.raidpoints ? user.raidpoints?.toFixed(2) : 0}
               </p>
             </div>
-
-            {whitelist.includes(publicKey && publicKey.toBase58()) && (
-              <button
-                onClick={() => setModal(!modal)}
-                className="bg-tesmo2 font-bold text-white p-2 rounded-lg"
-              >
-                New +
-              </button>
-            )}
+            <div className="flex gap-2 items-center">
+              {whitelist.includes(publicKey && publicKey.toBase58()) && (
+                <button
+                  onClick={() => setModal(!modal)}
+                  className="bg-tesmo2 font-bold text-white p-2 rounded-lg"
+                >
+                  New +
+                </button>
+              )}
+              {whitelist.includes(publicKey && publicKey.toBase58()) && (
+                <Sendpoints />
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-4 w-full mt-2 ">

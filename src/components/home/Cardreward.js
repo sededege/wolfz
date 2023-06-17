@@ -8,6 +8,7 @@ import { useWallet } from "@solana/wallet-adapter-react";
 import { getUser, updatePoints, getdata } from "../utils/firebaseFunctions";
 import Swal from "sweetalert2/dist/sweetalert2.js";
 import solscan from ".././img/solscan.png";
+import { whitelist } from "./Whitelist";
 
 const Cardreward = ({ id, pointsuser, upd, number }) => {
   const { publicKey } = useWallet();
@@ -24,12 +25,7 @@ const Cardreward = ({ id, pointsuser, upd, number }) => {
   const [real, setReal] = React.useState([]);
   const [user, setUser] = React.useState(null);
   const [error, setError] = React.useState(false);
-  const whitelist = [
-    "EGepWRwr3jMixiKRU584tm1vVbhEoXBE2jqYijzwwCxK",
-    "BZeYLWwXLzKBYA7E3om8J1ShmSZ2VQz2c19yM8RrMhe3",
-    "AK3EpwLuTLsRqoMDz2hqCv5rq6tPfaWcVSNqKcrY7sGK",
-    "z624HRfLVoPUCcGZmaRXctwzoYJ2qCmb1CxBHSbEKqn",
-  ];
+ 
 
   const [count, setCount] = React.useState(0);
   

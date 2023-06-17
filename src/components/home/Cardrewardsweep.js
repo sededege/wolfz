@@ -19,6 +19,7 @@ import solscan from ".././img/solscan.png";
 import * as web3 from "@solana/web3.js";
 import { Buffer } from "buffer";
 import { hashlist } from "./hashlist";
+import { whitelist } from "./Whitelist";
 
 const Cardrewardsweep = ({ id, pointsuser, upd, number, sweep }) => {
   global.Buffer = Buffer;
@@ -38,13 +39,7 @@ const Cardrewardsweep = ({ id, pointsuser, upd, number, sweep }) => {
   const [user, setUser] = React.useState(null);
   const [error, setError] = React.useState(false);
   const [btnsweep, setBtnSweep] = React.useState(true);
-  const whitelist = [
-    "EGepWRwr3jMixiKRU584tm1vVbhEoXBE2jqYijzwwCxK",
-    "BZeYLWwXLzKBYA7E3om8J1ShmSZ2VQz2c19yM8RrMhe3",
-    "AK3EpwLuTLsRqoMDz2hqCv5rq6tPfaWcVSNqKcrY7sGK",
-    "z624HRfLVoPUCcGZmaRXctwzoYJ2qCmb1CxBHSbEKqn",
-  ];
-
+ 
   const [count, setCount] = React.useState(0);
 
   function UnitCounter() {
