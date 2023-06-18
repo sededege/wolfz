@@ -132,13 +132,12 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
   };
 
   function updaterealtime(uid, count2) {
-    console.log(count2);
-    if (pointsuser - data.price * count2 >= 0) {
-      const datapoints = {
+  
+     /*  const datapoints = {
         id: publicKey && publicKey.toBase58(),
         points: pointsuser - data.price * count2,
       };
-      updatePoints(datapoints);
+      updatePoints(datapoints); */
 
       setBuying(true);
       setTimeout(() => {
@@ -161,13 +160,9 @@ const Cardrewardsol = ({ id, pointsuser, upd, number }) => {
       setCount(0);
       upd();
       return update(ref(database), updates);
-    } else {
-      setError(true);
-      setTimeout(() => {
-        setError(false);
-      }, 5000);
-    }
+    
   }
+  
   function updaterealtimeespecial(uid) {
     // Write the new post's data simultaneously in the posts list and the user's post list.
     const updates = {};
