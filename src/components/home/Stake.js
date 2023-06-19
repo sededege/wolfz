@@ -266,9 +266,13 @@ const Staked = () => {
     /*  console.log(points) */
     /*     puntoss = puntoss + result;
      */
-    
-    puntoss =  Math.floor(puntoss) + Math.floor(result);
+    console.log('puntos',puntoss)
 
+    puntoss = puntoss + result;
+
+
+    console.log('puntos',puntoss)
+    console.log('userpoints', user.points)
 
   };
 
@@ -333,8 +337,8 @@ const Staked = () => {
       setStake([]);
     } else if (a === "claimall") {
       let result = [];
-      updatestake(stake).map((a) => pointsearn(a.snapshot, Math.floor(parseInt(a.points))));
-      setClaimed(true);
+      updatestake(stake).map((a) => pointsearn(a.snapshot, a.points))
+      setClaimed(true)
 
       nfts2.forEach((e) =>
         stake.find((f) => f.tokenAddress === e.tokenAddress)
@@ -345,6 +349,7 @@ const Staked = () => {
       const tostake2 = result.map((a) => ({
         ...a,
         snapshot: `${Date.now()}`,
+     /*  snapshot: a.snapshot, */
         points: a.name && a.name.slice(0, 4) === "Ruby" ? 3 * qtyxhr : qtyxhr,
         /*         blocknumber: a.provenance[0].blockNumber,
          */
@@ -358,7 +363,7 @@ const Staked = () => {
 
       const datapoints = {
         id: publicKey && publicKey.toBase58(),
-        points: Math.floor(parseInt(user.points)) + puntoss,
+        points: Math.floor(parseInt(user.points)) + puntoss ,
       };
       updateNfts(data2);
       updatePoints(datapoints);
