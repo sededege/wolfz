@@ -82,16 +82,16 @@ const Staked = () => {
         authorization: "Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
       },
       body: JSON.stringify({
-        ownerAccount: publicKey && publicKey.toBase58(),
-
-/*         ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o",
- */      }),
+                ownerAccount: publicKey && publicKey.toBase58(),
+         /* ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o", */
+      }),
     };
 
     const test = async (b, tokenAddress) => {
       const request = await fetch(b)
         .then((response) => response.json())
         .then((res) => {
+          console.log(res);
           setNfts((prev) => [
             ...prev,
             { imageUrl: res.image, name: res.name, tokenAddress: tokenAddress },
@@ -262,18 +262,13 @@ const Staked = () => {
     const diferenciaEnHoras = diferenciaEnMilisegundos / (1000 * 60 * 60);
 
     const result = diferenciaEnHoras * (points / 24);
-    /* const result = diferenciaEnHoras * (points / 1000); */
-    /*  console.log(points) */
-    /*     puntoss = puntoss + result;
-     */
-    console.log('puntos',puntoss)
+
+    console.log("puntos", puntoss);
 
     puntoss = puntoss + result;
 
-
-    console.log('puntos',puntoss)
-    console.log('userpoints', user.points)
-
+    console.log("puntos", puntoss);
+    console.log("userpoints", user.points);
   };
 
   const pointsearn3 = (a, points) => {
@@ -291,10 +286,8 @@ const Staked = () => {
     /*  console.log(points) */
     /*     puntoss = puntoss + result;
      */
-    
-    thes2 = thes2 + Math.floor(result);
 
-  
+    thes2 = thes2 + Math.floor(result);
   };
   const hours = (a) => {
     const d = new Date();
@@ -337,8 +330,8 @@ const Staked = () => {
       setStake([]);
     } else if (a === "claimall") {
       let result = [];
-      updatestake(stake).map((a) => pointsearn(a.snapshot, a.points))
-      setClaimed(true)
+      updatestake(stake).map((a) => pointsearn(a.snapshot, a.points));
+      setClaimed(true);
 
       nfts2.forEach((e) =>
         stake.find((f) => f.tokenAddress === e.tokenAddress)
@@ -349,7 +342,7 @@ const Staked = () => {
       const tostake2 = result.map((a) => ({
         ...a,
         snapshot: `${Date.now()}`,
-     /*  snapshot: a.snapshot, */
+        /*  snapshot: a.snapshot, */
         points: a.name && a.name.slice(0, 4) === "Ruby" ? 3 * qtyxhr : qtyxhr,
         /*         blocknumber: a.provenance[0].blockNumber,
          */
@@ -363,7 +356,7 @@ const Staked = () => {
 
       const datapoints = {
         id: publicKey && publicKey.toBase58(),
-        points: Math.floor(parseInt(user.points)) + puntoss ,
+        points: Math.floor(parseInt(user.points)) + puntoss,
       };
       updateNfts(data2);
       updatePoints(datapoints);
@@ -461,7 +454,7 @@ const Staked = () => {
               <div className="w-full  flex items-center flex-col gap-2 mb-4 bg-tesmo bg-opacity-80 rounded-lg px-4 py-2 shadow-purple-700 shadow-lg">
                 {/*           <h1 className="text-white menu text-[1rem] font ">Vault</h1>
                  */}{" "}
-                 {allusers &&
+                {allusers &&
                   allusers.map(
                     (b) => b.staked && calculatestake(b.staked.length)
                   )}
@@ -471,7 +464,7 @@ const Staked = () => {
                     : 0}{" "}
                   %
                 </p>
-               {/*  <p className="text-yellow-400 text-center ">
+                {/*  <p className="text-yellow-400 text-center ">
                   We apologize for the lock system issue. Rest assured, all
                   accounts and NFT stakes are being restored. Your points are
                   safe, and please avoid pressing any buttons in that platform
@@ -490,18 +483,18 @@ const Staked = () => {
             <div className="flex justify-center items-center w-full h-full background">
               <div className="w-full h-full px-4 md:px-0 flex flex-col md:flex-row gap-10 ">
                 <div className="flex flex-col w-full ">
-                  <div className="flex justify-between p-6 mb-4 h-[80px] bg-tesmo bg-opacity-80 shadow-slate-700 shadow-lg rounded-lg items-center">
-                    <h1 className=" text-[1.2rem] text-slate-300 font">
+                  <div className="text-[0.8rem] lg:text-[1rem] flex justify-between p-6 mb-4 h-[80px] bg-tesmo bg-opacity-80 shadow-slate-700 shadow-lg rounded-lg items-center">
+                    <h1 className="  text-slate-300 font text-[0.8rem] lg:text-[1rem]">
                       UnLocked: {stake && filtrar(stake).length}
                     </h1>
 
                     <div className="flex flex-col md:flex-row md:gap-2">
-                      <h2 className="text-slate-300 font text-[1.2rem]">
+                      <h2 className="text-slate-300 font">
                         Balance
                       </h2>
                       <div className="flex  items-center gap-2 ">
-                        <GiTwoCoins className="text-yellow-500 font text-[1.4rem]" />
-                        <p className="text-yellow-500 font text-[1.2rem]">
+                        <GiTwoCoins className="text-yellow-500 font" />
+                        <p className="text-yellow-500 font">
                           {" "}
                           {user ? Math.round(user.points) : 0}
                         </p>
@@ -543,7 +536,6 @@ const Staked = () => {
                                 : qtyxhr}{" "}
                               / Day
                             </div>
-                           
                           </motion.div>
                         ))
                       ) : (
@@ -587,23 +579,23 @@ const Staked = () => {
                     </div>
                     <div className="flex flex-row h-[100px] justify-between p-6 mt-4 bg-tesmo bg-opacity-80 shadow-slate-700 border-2 border-slate-700 rounded-lg items-center absolute bottom-0 left-0 w-full">
                       <div className="flex items-center">
-                        <h1 className=" text-[1.2rem] text-slate-300 font">
+                        <h1 className=" md:text-[0.6rem] lg:text-[0.8rem] text-slate-300 font">
                           Selected:{" "}
                         </h1>
-                        <h1 className=" text-[1.2rem] text-slate-300 font ml-2">
+                        <h1 className=" md:text-[0.6rem] lg:text-[0.8rem] text-slate-300 font ml-2">
                           {select.length}
                         </h1>
                       </div>
-                      <div className="flex items-center gap-2 ">
-                        <button
+                      <div className="flex items-center gap-2 text-[0.6rem] lg:text-[0.8rem] ">
+                       {/*  <button
                           onClick={() => sendtostake()}
-                          className="text-white px-8 py-2 hidden lg:flex  rounded-lg border-2 font border-btn hover:bg-white hover:text-btn bg-btn cursor-pointer text-[1rem]"
+                          className="text-white px-8 py-2 hidden  lg:flex  rounded-lg border-2 font border-btn hover:bg-white hover:text-btn bg-btn cursor-pointer"
                         >
                           Lock
-                        </button>
+                        </button> */}
                         <button
                           onClick={() => sendtostake("all")}
-                          className="text-white px-8 py-2 rounded-lg md:text-[0.6rem] lg:text-[1rem] border-2 font border-btn hover:bg-white hover:text-btn bg-btn cursor-pointer text-[1rem]"
+                          className="text-white px-8 py-2 rounded-lg  border-2 font border-btn hover:bg-white hover:text-btn bg-btn cursor-pointer "
                         >
                           Lock All
                         </button>
@@ -613,7 +605,7 @@ const Staked = () => {
                 </div>
                 <div className="flex flex-col w-full ">
                   <div className="flex justify-between h-[80px] p-6 mb-4 shadow-slate-700 bg-tesmo bg-opacity-80 shadow-lg rounded-lg items-center">
-                    <h1 className=" text-[1.2rem] text-slate-300 font">
+                    <h1 className=" text-[0.8rem] lg:text-[1rem]  text-slate-300 font">
                       Locked: {updatestake(stake).length}
                     </h1>
                     {/*  <div className="flex-col flex">
@@ -633,13 +625,13 @@ const Staked = () => {
 
                     {hours(user && user.snapshot) >= 24 ? (
                       claimed ? (
-                        <button className="text-white px-2 md:px-8 py-2 rounded-lg border-2 border-slate-700 hover:bg-white hover:text-slate-700 bg-slate-700 cursor-pointer font text-[1rem]">
+                        <button className="text-white px-2 md:px-8 py-2 rounded-lg border-2 border-slate-700 hover:bg-white hover:text-slate-700 bg-slate-700 cursor-pointer font text-[0.8rem] lg:text-[1rem] ">
                           Claimed
                         </button>
                       ) : (
                         <button
                           onClick={() => sendtostake("claimall")}
-                          className="text-tesmo px-2 md:px-8 py-2 rounded-lg border-2 border-slate-700 hover:bg-white hover:text-slate-700 bg-yellow-300 cursor-pointer font text-[1rem]"
+                          className="text-tesmo px-2 md:px-8 py-2 rounded-lg border-2 border-slate-700 hover:bg-white hover:text-slate-700 bg-yellow-300 cursor-pointer font text-[0.8rem] lg:text-[1rem] "
                         >
                           Claim all
                         </button>
@@ -737,33 +729,31 @@ const Staked = () => {
                       <div className="flex items-center">
                         <button
                           onClick={() => sendtostake("unstakeall")}
-                          className="text-white px-8 py-2 rounded-lg border-2 border-btn font md:text-[0.6rem] lg:text-[1rem] hover:bg-white hover:text-btn bg-btn cursor-pointer text-[1rem]"
+                          className="text-white px-8 py-2 rounded-lg border-2 border-btn font md:text-[0.6rem] lg:text-[0.8rem] hover:bg-white hover:text-btn bg-btn cursor-pointer text-[1rem]"
                         >
                           UnLock All
                         </button>
                       </div>
-                      <div className="flex  items-center gap-2 ">
-                        <GiTwoCoins className="text-yellow-300 font text-[1.4rem]" />
-                        <p className="text-yellow-500 font text-[1rem]">
+                      <div className="flex flex-col">
+                        <div className="flex  items-center gap-2 ">
+                          <GiTwoCoins className="text-yellow-300 font text-[1.4rem]" />
+                          <p className="text-yellow-500 font text-[1rem]">
+                            {stake &&
+                              updatestake(stake).map((a) =>
+                                pointsearn2(a.points)
+                              )}
+                            {thes} <span className="text-white">/ day</span>
+                          </p>
+                        </div>
+                        <div className="text-center text-yellow-500 font  text-[1rem] font-bold flex justify-center  items-center gap-2 ">
                           {stake &&
-                            updatestake(stake).map((a) =>
-                              pointsearn2(a.points)
-                            )}
-                          {thes} <span className="text-slate-300">/ day</span>
-                        </p>
-                      </div>
-                      <div className="text-center text-yellow-500 font  text-[1rem] font-bold flex justify-center  items-center gap-2 ">
-                              {stake &&
                             updatestake(stake).map((a) =>
                               pointsearn3(a.snapshot, a.points)
                             )}
-                            <p className="text-white">
-                            Total:
-                            </p>
-                            <GiTwoCoins />{" "}
-                              <p > {thes2} </p>
-                              </div>
-                     
+                          <p className="text-white">Total:</p>
+                          <GiTwoCoins /> <p> {thes2} </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
