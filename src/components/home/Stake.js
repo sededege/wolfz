@@ -83,8 +83,8 @@ const Staked = () => {
       },
       body: JSON.stringify({
                 ownerAccount: publicKey && publicKey.toBase58(),
-         /* ownerAccount: "BggQ6E7ZUwxc6y1mJNXpb1fZC1tBiPtu6o4pWYRTvm6o", */
-      }),
+/*          ownerAccount: "cHe9jhHZq6A4FVoAZnucyUM33QP9uTHTEQ64WyVqE3n",
+ */      }),
     };
 
     const test = async (b, tokenAddress) => {
@@ -307,7 +307,7 @@ const Staked = () => {
       const tostake = filtrar(stake).map((a) => ({
         ...a,
         snapshot: `${Date.now()}`,
-        points: a.name && a.name.slice(0, 4) === "Ruby" ? 3 * qtyxhr : qtyxhr,
+        points: a.name && a.name.includes("Sapphire") || a.name.includes("Ruby") ? 3 * qtyxhr : qtyxhr,
       }));
 
       const dataa = {
@@ -343,7 +343,7 @@ const Staked = () => {
         ...a,
         snapshot: `${Date.now()}`,
         /*  snapshot: a.snapshot, */
-        points: a.name && a.name.slice(0, 4) === "Ruby" ? 3 * qtyxhr : qtyxhr,
+        points: a.name && a.name.includes("Sapphire") || a.name.includes("Ruby") ? 3 * qtyxhr : qtyxhr,
         /*         blocknumber: a.provenance[0].blockNumber,
          */
       }));
@@ -366,7 +366,7 @@ const Staked = () => {
       const tostake = select.map((a) => ({
         ...a,
         snapshot: `${Date.now()}`,
-        points: a.name && a.name.slice(0, 4) === "Ruby" ? 3 * qtyxhr : qtyxhr,
+        points: a.name && a.name.includes("Sapphire") || a.name.includes("Ruby") ? 3 * qtyxhr : qtyxhr,
         /*  blocknumber: a.provenance[0].blockNumber, */
       }));
 
@@ -531,7 +531,7 @@ const Staked = () => {
                             </p>
                             <div className="text-center text-yellow-500  text-[0.7rem] font-bold flex justify-center  items-center gap-2 ">
                               <GiTwoCoins />{" "}
-                              {a.name && a.name.slice(0, 4) === "Ruby"
+                              {a.name && a.name.includes("Sapphire") || a.name.includes("Ruby")
                                 ? 3 * qtyxhr
                                 : qtyxhr}{" "}
                               / Day

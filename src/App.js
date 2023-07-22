@@ -16,6 +16,7 @@ import Twitch from "./components/home/Twitch";
 import Twitchhome from "./components/home/Twitchhome";
 import Stacker from "./components/home/Stacker";
 import Snapshot from "./components/home/Snapshot";
+import Store from "./components/home/Store";
 
 require("./App.css");
 
@@ -33,6 +34,7 @@ const App = () => {
           {/*           <Route path="/*" element={<MainContainer />} />
            */}{" "}
           <Route path="/*" element={<Rewards />} />
+          <Route path="/store" element={<Store />} />
           <Route path="/vault" element={<Stake />} />
           <Route path="/sweep2earn" element={<Sweep />} />
           <Route path="/snapshot" element={<Snapshot />} />

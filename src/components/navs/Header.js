@@ -32,7 +32,11 @@ const Header = () => {
       name: "home",
       tab: "/Home",
     }, */
-
+   /*  {
+      id: 77,
+      name: "Store",
+      tab: "/store",
+    }, */
     {
       id: 4,
       name: "Watch2earn",
