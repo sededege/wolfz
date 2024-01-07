@@ -517,7 +517,7 @@ const Staked = () => {
                               You don't have any Thesmophoria NFT.
                               <WalletMultiButton />
                               <a
-                                href="https://magiceden.io/marketplace/tesmophoria"
+                                href="https://magiceden.io/marketplace/dyor_wolfz"
                                 className="p-2 bg-btn rounded-lg"
                               >
                                 Enter on Valhalla.
@@ -665,7 +665,7 @@ const Staked = () => {
                               You don't have any Thesmophoria NFT.
                               <WalletMultiButton />
                               <a
-                                href="https://magiceden.io/marketplace/tesmophoria"
+                                href="https://magiceden.io/marketplace/dyor_wolfz"
                                 className="p-2 bg-btn rounded-lg"
                               >
                                 Enter on Valhalla.
@@ -716,7 +716,7 @@ const Staked = () => {
             <p className="text-white font text-[1rem]">
               Buy your tickets{" "}
               <a
-                href="https://magiceden.io/marketplace/tesmophoria"
+                href="https://magiceden.io/marketplace/dyor_wolfz"
                 className="text-pink-500 font-bold"
               >
                 Magic Eden

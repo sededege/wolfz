@@ -17,6 +17,9 @@ import {
   WalletDialogProvider,
   WalletMultiButton,
 } from "@solana/wallet-adapter-material-ui";
+import { AiOutlineTwitter } from "react-icons/ai";
+import { FaDiscord } from "react-icons/fa";
+import me from '../img/me.png'
 
 const Header = () => {
   const history = useNavigate();
@@ -37,20 +40,26 @@ const Header = () => {
       name: "Store",
       tab: "/store",
     }, */
-    {
+    /* {
       id: 4,
       name: "Watch2earn",
       tab: "/watch2earn",
-    },
+    }, */
     {
-      id: 1,
-      name: "raffles",
+      id: 0,
+      name: "home",
       tab: "/",
     },
+   /*  {
+      id: 1,
+      name: "raffles",
+      tab: "/raffles",
+    }, */
+   
     {
       id: 3,
-      name: "vault",
-      tab: "/vault",
+      name: "kingdom",
+      tab: "/kingdom",
     },
   ];
 
@@ -97,83 +106,56 @@ const Header = () => {
 
   return (
     <header
-      className={
-        "md:px-10 px-5 w-full flex justify-between  top-0 h-[10vh] fixed bg-transparent z-[100]"
-      }
+     
     >
       {/* desktop & tablet */}
 
-      <div className="hidden md:flex w-full h-full items-center justify-between">
-        <p className="font-bold font text-[1.6rem] text-white cursor-pointer">
-          Thesmophoria
-        </p>
+      <div className="hidden p-4 md:flex md:fixed left-0 top-0 md:flex-col h-full items-center justify-between">
+       <div>
         <Link
           to={"/Home"}
-          className="flex  items-center gap-2 fixed left-[calc(50%-40px)]"
         >
           <img
             src={Logo}
-            className="w-20
-           rounded-full object-cover mix-blend-screen testeo"
+            className="w-16
+           rounded-full object-cover mix-blend-screen "
             alt="ß"
           />
         </Link>
-
-        <div className="flex items-center gap-4">
+        </div>
+        <div className="flex flex-col items-center gap-4">
           {menunav.map((a, index) => (
             <Link key={index} to={a.tab}>
               <div
                 onClick={() => setMenu(a.name)}
                 key={index}
                 className={`${
-                  menu === a.name ? "text-yellow-400" : "text-white"
-                }  font-bold font text-[1.2rem] cursor-pointer `}
+                  menu === a.name ? "text-yellow-400 " : "text-white"
+                }  font-bold font text-[0.8rem] cursor-pointer `}
               >
                 {a.name}
               </div>
             </Link>
           ))}
+        <WalletMultiButton />
 
-          {/*  <div className="relative flex items-center gap-2">
-            <motion.div whileTap={{ scale: 0.6 }} className="drop-shadow-md ">
-              <BsFillPersonFill
-                className={`${
-                  user ? "text-booty" : "text-gray-400"
-                } w-10 h-10 p-2  bg-white cursor-pointer rounded-full  `}
-                alt="userprofile"
-                onClick={() => setIsMenu(!isMenu)}
-              />
-            </motion.div>
-         {isMenu && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.6 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.6 }}
-                className="w-40 bg-gray-50 shadow-xl rounded-lg flex flex-col absolute top-12 right-0"
-              >
-            
-                {user && user.email === "lindadenisova012@gmail.com" && (
-                  <Link to={"/Dashboard"}>
-                    <p
-                      className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
-                      onClick={() => setIsMenu(false)}
-                    >
-                      Dashboard
-                    </p>
-                  </Link>
-                )}
-
-                <p
-                  className="px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-100 transition-all duration-100 ease-in-out text-textColor text-base"
-                  onClick={logout}
-                >
-                  Logout <MdLogout />
-                </p>
-              </motion.div>
-            )}
-          </div> */}
-          <WalletMultiButton />
+         
         </div>
+        <div className="md:flex md:flex-col  hidden gap-4 items-center cursor-pointer">
+          <div className="flex gap-2">
+        <a href="https://magiceden.io/marketplace/dyor_wolfz">
+          <img className="w-6 h-6 object-contain " src={me} alt="me" />
+        </a>
+        <a href="https://twitter.com/DyorWolfz">
+          <AiOutlineTwitter className="text-[26px] text-white  hover:text-sky-500" />
+        </a>
+        <a href="https://discord.com/invite/KxKAyntQFZ">
+          <FaDiscord className="text-[26px] text-white hover:text-purple-500" />
+        </a>
+        </div>
+
+      </div>
+
       </div>
 
       {/* mobile */}
@@ -185,7 +167,7 @@ const Header = () => {
           <img src={Logo} className="w-16 object-cover" alt="logo" />
         </Link>
 
-        <div className="flex  gap-2 items-center text-[2rem] text-white">
+        <div className="flex  gap-2 items-center text-[1rem] text-white">
           <Link to={`/vault`} className="flex items-center gap-2">
             <AiFillLock />
           </Link>

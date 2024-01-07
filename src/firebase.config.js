@@ -5,14 +5,14 @@ import { getStorage } from 'firebase/storage'
 import { getDatabase } from "firebase/database";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB1JTMOtU6jbU3hrkWLHwj6vQw3k7BX7Dc",
-  authDomain: "thesmophoria-8e438.firebaseapp.com",
-  databaseURL: 'https://thesmophoria-8e438-default-rtdb.firebaseio.com/',
-  projectId: "thesmophoria-8e438",
-  storageBucket: "thesmophoria-8e438.appspot.com",
-  messagingSenderId: "408759522088",
-  appId: "1:408759522088:web:d3da851c962a8fdcd8361d",
-  measurementId: "G-SDMXCH1NY1"
+  apiKey: "AIzaSyAiD7okVxGHrQ9dMLCWNftJSk51ON6hK-U",
+  authDomain: "bookingapp-cb68d.firebaseapp.com",
+  databaseURL: "https://bookingapp-cb68d-default-rtdb.firebaseio.com",
+  projectId: "bookingapp-cb68d",
+  storageBucket: "bookingapp-cb68d.appspot.com",
+  messagingSenderId: "781865375376",
+  appId: "1:781865375376:web:9a69ff6a0a9e71e4abea15",
+  measurementId: "G-P8HNJTC70Z"
 }
 
 

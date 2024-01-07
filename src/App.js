@@ -11,13 +11,9 @@ import Stake from "./components/home/Stake";
 import Header from "./components/navs/Header";
 import Footer from "./components/home/Footer";
 import { AnimatePresence } from "framer-motion";
-import Sweep from "./components/home/Sweep";
-import Twitch from "./components/home/Twitch";
-import Twitchhome from "./components/home/Twitchhome";
-import Stacker from "./components/home/Stacker";
-import Snapshot from "./components/home/Snapshot";
-import Store from "./components/home/Store";
 
+import Stacker from "./components/home/Stacker";
+import Home from './components/home/Home'
 require("./App.css");
 
 const App = () => {
@@ -33,15 +29,17 @@ const App = () => {
         <Routes location={location} key={location.pathname}>
           {/*           <Route path="/*" element={<MainContainer />} />
            */}{" "}
-          <Route path="/*" element={<Rewards />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/vault" element={<Stake />} />
-          <Route path="/sweep2earn" element={<Sweep />} />
-          <Route path="/snapshot" element={<Snapshot />} />
-          <Route path="/watch2earn" element={<Twitchhome/>} />
+                     <Route path="/*" element={<Home />} />
+
+          <Route path="/raffles" element={<Rewards />} />
+{/*           <Route path="/store" element={<Store />} />
+ */}          <Route path="/kingdom" element={<Stake />} />
+     {/*      <Route path="/sweep2earn" element={<Sweep />} /> */}
+        {/*   <Route path="/snapshot" element={<Snapshot />} /> */}
+    {/*       <Route path="/watch2earn" element={<Twitchhome/>} /> */}
           <Route path="/staker" element={<Stacker/>} />
         </Routes>
-        <Footer />
+       {/*  <Footer /> */}
       </>
     </div>
   );

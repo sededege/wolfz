@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
-import { GiTwoCoins } from "react-icons/gi";
+import { GiWolfHowl } from "react-icons/gi";
 import Countdown from "react-countdown";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -38,8 +38,8 @@ const Staked = () => {
   const [loading, setLoading] = useState(true);
   const [loading2, setLoading2] = useState(true);
   const [msg, setMsg] = useState(true);
-  let qtyxhr = 10;
-  let supply = 5100;
+  let qtyxhr = 1;
+  let supply = 2222;
   const [update, setUpdate] = useState();
   let puntoss = 0;
   let thes = 0;
@@ -58,74 +58,14 @@ const Staked = () => {
     thes = thes + a;
   };
 
-  const fetchnfts = async () => {
-    /* const options = {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        authorization: 'Bearer 41d5a889-a8e6-4f4d-9183-4d594ca01992'
-      },
-      body: JSON.stringify({
-          ownerAccount: publicKey && publicKey.toBase58(), 
-         ownerAccount: 'DwyWVeKQvRTASoNR7nLYwGFiRcGNkWPiiD9Td2YJj3az',
-        helloMoonCollectionId: 'aec8c053152b2f1b7dc01db7e298d571',
-        page: num
-      })
-    }; */
-
-    const options = {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-        authorization: "Bearer b5ad5dfe-e109-4b7d-945e-b20ba8f7925f",
-      },
-      body: JSON.stringify({
-                ownerAccount: publicKey && publicKey.toBase58(),
-/*          ownerAccount: "cHe9jhHZq6A4FVoAZnucyUM33QP9uTHTEQ64WyVqE3n",
- */      }),
-    };
-
-    const test = async (b, tokenAddress) => {
-      const request = await fetch(b)
-        .then((response) => response.json())
-        .then((res) => {
-          console.log(res);
-          setNfts((prev) => [
-            ...prev,
-            { imageUrl: res.image, name: res.name, tokenAddress: tokenAddress },
-          ]);
-          setNfts2((prev) => [
-            ...prev,
-            { imageUrl: res.image, name: res.name, tokenAddress: tokenAddress },
-          ]);
-        });
-    };
-    fetch(
-      "https://rest-api.hellomoon.io/v0/hello-moon/thesmorphia/owners",
-      options
-    )
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-
-        res.data.map((a) => {
-          /* setNfts((prev) => [...prev, a])
-        setNfts2((prev) => [...prev, a]) */
-          test(a.metadatajson.uri, a.mint);
-        });
-      })
-      .catch((err) => console.error(err));
-
-    /*  const body = {
+  const fetchnfts = async (num) => {
+   
+     const body = {
       method: "qn_fetchNFTs",
       params: {
         wallet: publicKey && publicKey.toBase58(),
-             wallet: "FKTA8fh6rhirjgjusihA2ctu6nKYdyWnHE95wqnEG3qq", 
-        
-     
-        page: num,
+/*              wallet: "FKTA8fh6rhirjgjusihA2ctu6nKYdyWnHE95wqnEG3qq", 
+ */        page: num,
         perPage: 40,
         omitFields: ['collectionName','traits','creators','provenance','network','chain']
 
@@ -137,36 +77,13 @@ const Staked = () => {
       body: JSON.stringify(body),
     };
     const endpoints = [
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
-      "https://evocative-orbital-forest.solana-mainnet.quiknode.pro/3a94816de54b8d84cb4122fc520302b9d204260a/",
-      "https://newest-delicate-dust.solana-mainnet.quiknode.pro/cef8f3a8203547eb69213067965a2c7b2a6da64d/",
-      "https://billowing-virulent-gas.solana-mainnet.quiknode.pro/cd78f9ac76e21ebc9a89b54ff106a19bff9ebdb9/",
-      "https://hidden-autumn-voice.solana-mainnet.quiknode.pro/a519e278a8928f5b2b64469b1839ecbb216c35c5/",
-      "https://ancient-crimson-slug.solana-mainnet.quiknode.pro/f92fc31cc8ef023d25c0c6a1e234ed5a539c9c52/",
+"https://patient-skilled-market.solana-mainnet.quiknode.pro/00d39a89360cb73701ddfcd8084981ea171b603c/"      
     ];
 
-    return await fetch(endpoints[num], options)
+    return await fetch(endpoints[0], options)
       .then((res) => res.json())
       .then((res) => {
+        console.log(res)
         return (
           res &&
           res.result &&
@@ -174,13 +91,19 @@ const Staked = () => {
             .filter(
               (b) =>
                 b.collectionAddress ===
-                "HNvbqajUp8tYYRRBwm4cqeRQRbahLLTSLdvgi6QzM4cB"
+                "5iEQLEBSSedT2EBGSMfVuFgp2ZUw3KHMa6n3Na6B58NN"
             ) .map((a) => {
-              setNfts((prev) => [...prev, a]);
-              setNfts2((prev) => [...prev, a]);
+              setNfts((prev) => [
+                ...prev, 
+                { imageUrl: a.imageUrl, name: a.name, tokenAddress: a.tokenAddress },
+              ]);
+              setNfts2((prev) => [
+                ...prev,
+                { imageUrl: a.imageUrl, name: a.name, tokenAddress: a.tokenAddress },
+              ]);
             })
         );
-      }); */
+      });
   };
 
   const checkuser = async (a) => {
@@ -214,7 +137,11 @@ const Staked = () => {
       setStake(test2.staked);
       setNfts([]);
       setNfts2([]);
-      fetchnfts();
+      fetchnfts(1);
+      fetchnfts(2);
+      fetchnfts(3);
+      fetchnfts(4);
+     
       setTimeout(() => {
         setLoading(false);
       }, 4000);
@@ -417,7 +344,7 @@ const Staked = () => {
   };
 
   return (
-    <div className="w-full flex overflow-auto h-[80vh] md:px-40 mt-4  ">
+    <div className="w-[90vw] ml-[10vw] flex overflow-auto h-[80vh] md:px-40 mt-4  ">
       <div className="flex flex-col w-full h-full ">
         {loading ? (
           <AnimatePresence>
@@ -451,7 +378,7 @@ const Staked = () => {
         ) : (
           <>
             <div className="px-4 md:px-0">
-              <div className="w-full  flex items-center flex-col gap-2 mb-4 bg-tesmo bg-opacity-80 rounded-lg px-4 py-2 shadow-purple-700 shadow-lg">
+              <div className="w-full  flex items-center flex-col gap-2 mb-4 bg-tesmo bg-opacity-80 rounded-lg px-4 py-2 shadow-slate-700 shadow-lg">
                 {/*           <h1 className="text-white menu text-[1rem] font ">Vault</h1>
                  */}{" "}
                 {allusers &&
@@ -483,17 +410,17 @@ const Staked = () => {
             <div className="flex justify-center items-center w-full h-full background">
               <div className="w-full h-full px-4 md:px-0 flex flex-col md:flex-row gap-10 ">
                 <div className="flex flex-col w-full ">
-                  <div className="text-[0.8rem] lg:text-[1rem] flex justify-between p-6 mb-4 h-[80px] bg-tesmo bg-opacity-80 shadow-slate-700 shadow-lg rounded-lg items-center">
-                    <h1 className="  text-slate-300 font text-[0.8rem] lg:text-[1rem]">
+                  <div className="text-[0.6rem] lg:text-[1rem] flex justify-between p-6 mb-4 h-[80px] bg-tesmo bg-opacity-80 shadow-slate-700 shadow-lg rounded-lg items-center">
+                    <h1 className="  text-slate-300 font text-[0.6rem] lg:text-[0.8rem]">
                       UnLocked: {stake && filtrar(stake).length}
                     </h1>
 
                     <div className="flex flex-col md:flex-row md:gap-2">
-                      <h2 className="text-slate-300 font">
+                      <h2 className="text-[0.8rem] text-slate-300 font">
                         Balance
                       </h2>
                       <div className="flex  items-center gap-2 ">
-                        <GiTwoCoins className="text-yellow-500 font" />
+                        <GiWolfHowl className="text-yellow-500 font text-[0.8rem]" />
                         <p className="text-yellow-500 font">
                           {" "}
                           {user ? Math.round(user.points) : 0}
@@ -517,9 +444,9 @@ const Staked = () => {
                             onClick={() => addToStake(a)}
                             className={`${
                               select.includes(a)
-                                ? " shadow-md bg-tesmo shadow-purple-500"
+                                ? " shadow-md bg-tesmo shadow-slate-500"
                                 : "bg-tesmo"
-                            }  mx-auto transition-all 2s ease-in border-[1px] hover:shadow-md hover:shadow-purple-500 border-tesmo  cursor-pointer  h-[175px]  hover:bg-tesmo2  p-2 rounded-lg`}
+                            }  mx-auto transition-all 2s ease-in border-[1px] hover:shadow-md hover:shadow-slate-500 border-tesmo  cursor-pointer  h-[175px]  hover:bg-tesmo2  p-2 rounded-lg`}
                           >
                             <img
                               className="w-[100px] object-contain mx-auto rounded-lg"
@@ -530,7 +457,7 @@ const Staked = () => {
                               {a.name}
                             </p>
                             <div className="text-center text-yellow-500  text-[0.7rem] font-bold flex justify-center  items-center gap-2 ">
-                              <GiTwoCoins />{" "}
+                              <GiWolfHowl />{" "}
                               {a.name && a.name.includes("Sapphire") || a.name.includes("Ruby")
                                 ? 3 * qtyxhr
                                 : qtyxhr}{" "}
@@ -544,7 +471,7 @@ const Staked = () => {
                             <div role="status">
                               <svg
                                 aria-hidden="true"
-                                class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600"
+                                class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-slate-600"
                                 viewBox="0 0 100 101"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -562,13 +489,13 @@ const Staked = () => {
                             </div>
                           ) : publicKey ? (
                             <div className="flex flex-col text-white w-[200px] text-center gap-4">
-                              You don't have any Thesmophoria NFT.
+                              You don't have any Wolf.
                               <WalletMultiButton />
                               <a
-                                href="https://magiceden.io/marketplace/tesmophoria"
-                                className="p-2 bg-btn rounded-lg"
+                                href="https://magiceden.io/marketplace/dyor_wolfz"
+                                className=" text-black p-2 bg-yellow-400 rounded-lg"
                               >
-                                Enter on Valhalla.
+                               Enter on our DAO
                               </a>
                             </div>
                           ) : (
@@ -589,15 +516,15 @@ const Staked = () => {
                       <div className="flex items-center gap-2 text-[0.6rem] lg:text-[0.8rem] ">
                        {/*  <button
                           onClick={() => sendtostake()}
-                          className="text-white px-8 py-2 hidden  lg:flex  rounded-lg border-2 font border-btn hover:bg-white hover:text-btn bg-btn cursor-pointer"
+                          className="text-white px-8 py-2 hidden  lg:flex  rounded-lg border-2 font border-yellow-400 hover:bg-white hover:text-yellow-400 bg-yellow-400 cursor-pointer"
                         >
                           Lock
                         </button> */}
                         <button
                           onClick={() => sendtostake("all")}
-                          className="text-white px-8 py-2 rounded-lg  border-2 font border-btn hover:bg-white hover:text-btn bg-btn cursor-pointer "
+                          className="text-black px-8 py-2 rounded-lg  border-2 font border-yellow-400 hover:bg-white hover:text-yellow-400 bg-yellow-400 cursor-pointer "
                         >
-                          Lock All
+                        Send to Castle
                         </button>
                       </div>
                     </div>
@@ -605,7 +532,7 @@ const Staked = () => {
                 </div>
                 <div className="flex flex-col w-full ">
                   <div className="flex justify-between h-[80px] p-6 mb-4 shadow-slate-700 bg-tesmo bg-opacity-80 shadow-lg rounded-lg items-center">
-                    <h1 className=" text-[0.8rem] lg:text-[1rem]  text-slate-300 font">
+                    <h1 className=" text-[0.6rem] lg:text-[0.8rem]  text-slate-300 font">
                       Locked: {updatestake(stake).length}
                     </h1>
                     {/*  <div className="flex-col flex">
@@ -613,8 +540,8 @@ const Staked = () => {
                         Earning
                       </h2>
                       <div className="flex  items-center gap-2">
-                        <GiTwoCoins className="text-purple-400 font text-[1.4rem]" />
-                        <p className="text-purple-400 font text-[1.4rem]">
+                        <GiWolfHowl className="text-slate-400 font text-[1.4rem]" />
+                        <p className="text-slate-400 font text-[1.4rem]">
                           {updatestake(stake).map((a) =>
                             pointsearn(a.snapshot)
                           )}
@@ -640,11 +567,11 @@ const Staked = () => {
                       stake &&
                       stake.length > 0 && (
                         <div className="flex gap-2 text-tesmo2 items-center justify-center">
-                          <h1 className=" text-[1.2rem] text-slate-400 font">
+                          <h1 className=" text-[0.8rem] text-slate-400 font">
                             Claim in
                           </h1>
                           <Countdown
-                            className="text-purple-500"
+                            className="text-slate-500"
                             date={parseInt(user && user.snapshot) + 86400000}
                           />
                         </div>
@@ -679,7 +606,7 @@ const Staked = () => {
                               {a.name}
                             </p>
                             <div className="text-center text-yellow-300 font-bold flex justify-center  items-center gap-2 ">
-                              <GiTwoCoins />{" "}
+                              <GiWolfHowl />{" "}
                               <p className="text-yellow-500 font text-[1rem]">
                                 {a.points}
                               </p>
@@ -692,7 +619,7 @@ const Staked = () => {
                             <div role="status">
                               <svg
                                 aria-hidden="true"
-                                class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600"
+                                class="inline w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-slate-600"
                                 viewBox="0 0 100 101"
                                 fill="none"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -710,13 +637,13 @@ const Staked = () => {
                             </div>
                           ) : publicKey ? (
                             <div className="flex flex-col text-white w-[200px] text-center gap-4">
-                              You don't have any Thesmophoria NFT.
+                              You don't have any Wolf.
                               <WalletMultiButton />
                               <a
-                                href="https://magiceden.io/marketplace/tesmophoria"
-                                className="p-2 bg-btn rounded-lg"
+                                href="https://magiceden.io/marketplace/dyor_wolfz"
+                                className="p-2 text-black bg-yellow-400 rounded-lg"
                               >
-                                Enter on Valhalla.
+                               Enter on our DAO
                               </a>
                             </div>
                           ) : (
@@ -729,15 +656,15 @@ const Staked = () => {
                       <div className="flex items-center">
                         <button
                           onClick={() => sendtostake("unstakeall")}
-                          className="text-white px-8 py-2 rounded-lg border-2 border-btn font md:text-[0.6rem] lg:text-[0.8rem] hover:bg-white hover:text-btn bg-btn cursor-pointer text-[1rem]"
+                          className="text-black px-8 py-2 rounded-lg border-2 border-yellow-400 font md:text-[0.6rem] lg:text-[0.8rem] hover:bg-white hover:text-yellow-400 bg-yellow-400 cursor-pointer text-[1rem]"
                         >
-                          UnLock All
+                          Return Wolfz
                         </button>
                       </div>
                       <div className="flex flex-col">
                         <div className="flex  items-center gap-2 ">
-                          <GiTwoCoins className="text-yellow-300 font text-[1.4rem]" />
-                          <p className="text-yellow-500 font text-[1rem]">
+                          <GiWolfHowl className="text-yellow-300 font text-[1.4rem]" />
+                          <p className="text-yellow-500 font text-[0.8rem]">
                             {stake &&
                               updatestake(stake).map((a) =>
                                 pointsearn2(a.points)
@@ -745,13 +672,13 @@ const Staked = () => {
                             {thes} <span className="text-white">/ day</span>
                           </p>
                         </div>
-                        <div className="text-center text-yellow-500 font  text-[1rem] font-bold flex justify-center  items-center gap-2 ">
+                        <div className="text-center text-yellow-500 font  text-[0.8rem] font-bold flex justify-center  items-center gap-2 ">
                           {stake &&
                             updatestake(stake).map((a) =>
                               pointsearn3(a.snapshot, a.points)
                             )}
-                          <p className="text-white">Total:</p>
-                          <GiTwoCoins /> <p> {thes2} </p>
+                          <p className="text-white mt-2">Total:</p>
+                          <GiWolfHowl /> <p> {thes2} </p>
                         </div>
                       </div>
                     </div>
@@ -774,7 +701,7 @@ const Staked = () => {
             <p className="text-white font text-[1rem]">
               Buy your tickets{" "}
               <a
-                href="https://magiceden.io/marketplace/tesmophoria"
+                href="https://magiceden.io/marketplace/dyor_wolfz"
                 className="text-pink-500 font-bold"
               >
                 Magic Eden

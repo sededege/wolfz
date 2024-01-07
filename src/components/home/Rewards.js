@@ -245,7 +245,8 @@ const Rewards = () => {
   };
 
   return (
-    <div className="h-[90vh] mt-[10vh] md:mt-0 md:h-[82vh] overflow-auto pb-10 w-full px-4 md:px-20 ">
+/*     <div className="h-[90vh] mt-[10vh] md:mt-0 md:h-[82vh] overflow-auto pb-10 w-full px-4 md:px-20 ">
+ */    <div className="w-[86vw] ml-[14vw] h-full items-center justify-center overflow-auto p-10">
       {loading && (
         <AnimatePresence>
           <motion.div
@@ -291,15 +292,15 @@ const Rewards = () => {
         <div className="w-full ">
           <div className="flex items-center justify-between mt-4 gap-2  ">
             <div className="flex items-center justify-center">
-              <h1 className="font text-[1.4rem]  text-white ">Balance</h1>
+              <h1 className="font text-[1rem]  text-white ">Balance</h1>
               <GiTwoCoins className="ml-4 text-yellow-400 font text-[1.2rem]" />
               <p className="text-yellow-400 font text-[1.2rem] ml-2">
                 {user && user.points ? Math.round(user.points) : 0}
               </p>
-              <GiTwoCoins className="ml-4 text-red-500 font text-[1.2rem]" />
+             {/*  <GiTwoCoins className="ml-4 text-red-500 font text-[1.2rem]" />
               <p className="text-red-500 font text-[1.2rem] ml-2">
                 {user && user.raidpoints ? user.raidpoints?.toFixed(2) : 0}
-              </p>
+              </p> */}
             </div>
             <div className="flex gap-2 items-center">
               {whitelist.includes(publicKey && publicKey.toBase58()) && (
