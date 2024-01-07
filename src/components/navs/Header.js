@@ -9,7 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { GoListUnordered } from "react-icons/go";
-import { GiTicket } from "react-icons/gi";
+import { GiTicket, GiWolfHowl } from "react-icons/gi";
 import { BsFillPersonFill } from "react-icons/bs";
 import { AiFillLock } from "react-icons/ai";
 import { WalletProvider, useWallet } from "@solana/wallet-adapter-react";
@@ -159,7 +159,7 @@ const Header = () => {
       </div>
 
       {/* mobile */}
-      <div className="flex items-center justify-between md:hidden w-full h-full ">
+      <div className="fixed left-0 px-4 flex top-0 items-center justify-between md:hidden w-full md:h-full ">
         <Link
           to={`${dondeestoy === "Dashboard" ? "/Dashboard" : "/Home"}`}
           className="flex items-center gap-2"
@@ -167,12 +167,12 @@ const Header = () => {
           <img src={Logo} className="w-16 object-cover" alt="logo" />
         </Link>
 
-        <div className="flex  gap-2 items-center text-[1rem] text-white">
-          <Link to={`/vault`} className="flex items-center gap-2">
+        <div className="flex  gap-2 items-center text-[1.2rem] text-white">
+          {/* <Link to={`/vault`} className="flex items-center gap-2">
             <AiFillLock />
-          </Link>
-          <Link to={`/raffle`} className="flex items-center gap-2">
-            <GiTicket />
+          </Link> */}
+          <Link to={`/kingdom`} className="flex items-center gap-2">
+            <GiWolfHowl />
           </Link>
           <WalletMultiButton />
         </div>

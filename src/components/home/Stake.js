@@ -344,7 +344,7 @@ const Staked = () => {
   };
 
   return (
-    <div className="w-[90vw] ml-[10vw] flex overflow-auto h-[80vh] md:px-40 mt-4  ">
+    <div className="sm:w-[90vw] sm:ml-[10vw] w-full flex overflow-auto h-[80vh] md:px-40 mt-4  ">
       <div className="flex flex-col w-full h-full ">
         {loading ? (
           <AnimatePresence>
@@ -530,7 +530,7 @@ const Staked = () => {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-col w-full ">
+                <div className="flex flex-col w-full  ">
                   <div className="flex justify-between h-[80px] p-6 mb-4 shadow-slate-700 bg-tesmo bg-opacity-80 shadow-lg rounded-lg items-center">
                     <h1 className=" text-[0.6rem] lg:text-[0.8rem]  text-slate-300 font">
                       Locked: {updatestake(stake).length}

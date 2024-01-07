@@ -2,14 +2,14 @@ import React from "react";
 import test from "./profile.gif";
 const Home = () => {
   return (
-    <div className="w-[86vw] ml-[14vw] h-full px-20 items-center justify-center flex flex-col">
+    <div className="md:w-[86vw] md:ml-[14vw] md:h-full   px-4 md:px-20 items-center justify-center flex flex-col">
       {/*       <img src={test} className="w-[400px] mb-4" alt="gif" />
        */}
       <div className="flex flex-col items-center justify-center bg-black bg-opacity-70 p-4 rounded-md">
         <h1 className="font text-white text-center  text-[1.6rem]">
           1st Phase = The Adoption
         </h1>
-        <div className="w-[35vw] mt-4">
+        <div className="md:w-[35vw] mt-4">
           <p className="text-white  text-center text-[1rem]">
             In our DAO, decisions are made collaboratively, with everyone
             contributing to prevent scams and execute profitable plays.{" "}
